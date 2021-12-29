@@ -1,0 +1,1 @@
+enum StatusSearch { INIT_SEARCH, NOT_VALUE, HAVE_VALUE }
