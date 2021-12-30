@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_native_admob/native_admob_controller.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:truyen_chu/common/common.dart';
 import 'package:truyen_chu/theme/theme.dart';
 import '../../biz/app_controller.dart';
@@ -35,8 +35,6 @@ class DetailStoryController extends GetxController {
 
   final showTitle = false.obs;
 
-  final nativeAdController = NativeAdmobController();
-
   final showButtonScrollTop = false.obs;
 
   final showReview = true.obs;
@@ -65,12 +63,12 @@ class DetailStoryController extends GetxController {
 
   @override
   void onInit() {
+    bannerAdMedium.load();
     super.onInit();
     if (Get.arguments != null) {
       storyId = Get.arguments['id'] ?? -1;
       _isFormList = Get.arguments['isFormList'] ?? false;
     }
-    nativeAdController.reloadAd();
 
     _initLoad();
     analytics.setCurrentScreen(screenName: Routes.DETAIL_STORY);
@@ -300,6 +298,19 @@ class DetailStoryController extends GetxController {
     if (startIndex == -1 || endIndex == -1) return "";
     return content.substring(startIndex, endIndex + end.length);
   }
+
+  ///ads
+  final bannerAdMedium = BannerAd(
+    adUnitId: AdHelper.bannerAdUnitId,
+    request: AdRequest(),
+    size: AdSize.mediumRectangle,
+    listener: BannerAdListener(
+      onAdLoaded: (_) {},
+      onAdFailedToLoad: (ad, err) {
+        ad.dispose();
+      },
+    ),
+  );
 
   @override
   void onClose() {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_admob/flutter_native_admob.dart';
-import 'package:flutter_native_admob/native_admob_options.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../theme/theme.dart';
 import '../../common/common.dart';
 
@@ -168,18 +167,13 @@ class DetailStoryPage extends GetView<DetailStoryController> {
           ],
         ),
         20.verticalSpace,
+        Container(
+          width: double.infinity,
+          height: controller.bannerAdMedium.size.height.toDouble(),
+          child: AdWidget(ad: controller.bannerAdMedium),
+        ),
+        20.verticalSpace,
         _buildIntroduce(),
-        NativeAdmob(
-          adUnitID: AdHelper.nativeAdUnitId,
-          loading: Center(child: CircularProgressIndicator()),
-          error: Text("Failed to load the ad"),
-          controller: controller.nativeAdController,
-          type: NativeAdmobType.full,
-          options: NativeAdmobOptions(
-            ratingColor: Colors.yellow,
-            // Others ...
-          ),
-        ).wrapHeight(300),
         const Divider(height: 40),
         ContainerRating(),
         30.verticalSpace,

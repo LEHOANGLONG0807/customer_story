@@ -108,12 +108,34 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                     itemBuilder: (context, index) {
                       final _text = controller.splitTextList[index];
                       if (index == 0) {
-                        return Center(
-                          child: Text(
-                            _text,
-                            textAlign: TextAlign.center,
-                            style: _theme.textTheme.headline5!.text3F2F0E,
-                          ),
+                        return Column(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: controller.bannerAdMedium.size.height.toDouble(),
+                              child: AdWidget(ad: controller.bannerAdMedium),
+                            ),
+                            Text(
+                              _text,
+                              textAlign: TextAlign.center,
+                              style: _theme.textTheme.headline5!.text3F2F0E,
+                            ),
+                          ],
+                        );
+                      }
+                      if (index == controller.splitTextList.length - 1) {
+                        return Column(
+                          children: [
+                            Text(
+                              _text,
+                              style: controller.textStyle.value.text3F2F0E,
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: controller.bannerAdMedium.size.height.toDouble(),
+                              child: AdWidget(ad: controller.bannerAdMedium),
+                            ),
+                          ],
                         );
                       }
                       return Text(

@@ -89,6 +89,7 @@ class ReadStoryController extends GetxController {
 
   @override
   void onInit() async {
+    _loadRewardedAd();
     Wakelock.enable();
     if (Get.arguments != null) {
       storyId = Get.arguments['storyId'] ?? -1;
@@ -100,7 +101,7 @@ class ReadStoryController extends GetxController {
     super.onInit();
     analytics.setCurrentScreen(screenName: Routes.READING_STORY);
     bannerAd.load();
-    _loadRewardedAd();
+    bannerAdMedium.load();
 
     /// lấy fontSize từ local
     final _fontSize = await _box.read(KEY_FONT_SIZE);
@@ -142,9 +143,6 @@ class ReadStoryController extends GetxController {
   /// get content truyện
 
   Future fetchChapterContentById() async {
-    if (chapterId % 10 == 0) {
-      _rewardedAd.show(onUserEarnedReward: (_, a) {});
-    }
     try {
       EasyLoading.show();
       final _response = await chapterRepository.fetchChapterContentById(chapterId: chapterId, storyId: storyId);
@@ -157,6 +155,9 @@ class ReadStoryController extends GetxController {
     } catch (e) {
       EasyLoading.dismiss();
       EasyLoading.showError('Đã xảy ra lỗi!');
+    }
+    if (chapterId % 10 == 0) {
+      _rewardedAd.show(onUserEarnedReward: (_, a) {});
     }
   }
 
@@ -481,26 +482,17 @@ class ReadStoryController extends GetxController {
       },
     ),
   );
-
-  late InterstitialAd _interstitialAd;
-
-  void _loadInterstitialAd() {
-    InterstitialAd.load(
-        adUnitId: AdHelper.rewardedAdUnitId,
-        request: AdRequest(),
-        adLoadCallback: InterstitialAdLoadCallback(
-          onAdLoaded: (ad) {
-            ad.fullScreenContentCallback = FullScreenContentCallback(
-              onAdDismissedFullScreenContent: (ad) {
-                _loadRewardedAd();
-              },
-            );
-          },
-          onAdFailedToLoad: (err) {
-            print('Failed to load a rewarded ad: ${err.message}');
-          },
-        ));
-  }
+  final bannerAdMedium = BannerAd(
+    adUnitId: AdHelper.bannerAdUnitId,
+    request: AdRequest(),
+    size: AdSize.mediumRectangle,
+    listener: BannerAdListener(
+      onAdLoaded: (_) {},
+      onAdFailedToLoad: (ad, err) {
+        ad.dispose();
+      },
+    ),
+  );
 
   late RewardedAd _rewardedAd;
 
@@ -529,7 +521,9 @@ class ReadStoryController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    _rewardedAd.show(onUserEarnedReward: (_, a) {});
+    Future.delayed(2.seconds, () {
+      _rewardedAd.show(onUserEarnedReward: (_, a) {});
+    });
   }
 
   @override
