@@ -34,7 +34,7 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                       ).wrapHeight(25),
                       _buildContainerRead(),
                       Container(
-                        width: double.infinity,
+                        width: controller.bannerAd.size.width.toDouble(),
                         height: controller.bannerAd.size.height.toDouble(),
                         child: AdWidget(ad: controller.bannerAd),
                       ),
@@ -111,9 +111,11 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                         return Column(
                           children: [
                             Container(
-                              width: double.infinity,
+                              width: controller.bannerAdMedium.size.width.toDouble(),
                               height: controller.bannerAdMedium.size.height.toDouble(),
-                              child: AdWidget(ad: controller.bannerAdMedium),
+                              child: AdWidget(
+                                ad: controller.bannerAdMedium,
+                              ),
                             ),
                             Text(
                               _text,
@@ -131,9 +133,11 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                               style: controller.textStyle.value.text3F2F0E,
                             ),
                             Container(
-                              width: double.infinity,
-                              height: controller.bannerAdMedium.size.height.toDouble(),
-                              child: AdWidget(ad: controller.bannerAdMedium),
+                              width: controller.bannerAdMedium2.size.width.toDouble(),
+                              height: controller.bannerAdMedium2.size.height.toDouble(),
+                              child: AdWidget(
+                                ad: controller.bannerAdMedium2,
+                              ),
                             ),
                           ],
                         );

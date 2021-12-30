@@ -90,6 +90,8 @@ class ReadStoryController extends GetxController {
   @override
   void onInit() async {
     _loadRewardedAd();
+    bannerAdMedium.load();
+    bannerAdMedium2.load();
     Wakelock.enable();
     if (Get.arguments != null) {
       storyId = Get.arguments['storyId'] ?? -1;
@@ -101,7 +103,7 @@ class ReadStoryController extends GetxController {
     super.onInit();
     analytics.setCurrentScreen(screenName: Routes.READING_STORY);
     bannerAd.load();
-    bannerAdMedium.load();
+
 
     /// lấy fontSize từ local
     final _fontSize = await _box.read(KEY_FONT_SIZE);
@@ -483,6 +485,16 @@ class ReadStoryController extends GetxController {
     ),
   );
   final bannerAdMedium = BannerAd(
+    adUnitId: AdHelper.bannerAdUnitId,
+    request: AdRequest(),
+    size: AdSize.mediumRectangle,
+    listener: BannerAdListener(
+      onAdLoaded: (_) {},
+      onAdFailedToLoad: (ad, err) {
+        ad.dispose();
+      },
+    ),
+  );  final bannerAdMedium2 = BannerAd(
     adUnitId: AdHelper.bannerAdUnitId,
     request: AdRequest(),
     size: AdSize.mediumRectangle,

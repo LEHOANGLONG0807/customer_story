@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
    <application
-        android:label="Truyện Mesay"
+        android:label="Truyện Hay"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -1,37 +1,37 @@
 {
   "project_info": {
-    "project_number": "502776796387",
-    "project_id": "mesaynovel-e9b4b",
-    "storage_bucket": "mesaynovel-e9b4b.appspot.com"
+    "project_number": "25997221758",
+    "project_id": "truyenhay-d086e",
+    "storage_bucket": "truyenhay-d086e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:502776796387:android:14069b66891f2988d0a1d6",
+        "mobilesdk_app_id": "1:25997221758:android:daad07075bb4ffc8f3dd2f",
         "android_client_info": {
           "package_name": "com.customer.truyenmesay"
         }
       },
       "oauth_client": [
         {
-          "client_id": "502776796387-dd40dunt3ccruhusiqv216l6472l2m00.apps.googleusercontent.com",
+          "client_id": "25997221758-3u8qvrl6l66srtev9rup5fgd4so7ukfc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDoVwtEEHPW8sPBV04gD9n8dxsKfiHTQ1U"
+          "current_key": "AIzaSyAsWNJ4ui3-SkL3N31iIBQuC0SeuAygWpI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "502776796387-dd40dunt3ccruhusiqv216l6472l2m00.apps.googleusercontent.com",
+              "client_id": "25997221758-3u8qvrl6l66srtev9rup5fgd4so7ukfc.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "502776796387-tj1q1osqb22s0id48e5ivu176lkjjric.apps.googleusercontent.com",
+              "client_id": "25997221758-kkammsulvqptlbgis1u63tv1dfbndvtl.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.customer.truyenmesay"

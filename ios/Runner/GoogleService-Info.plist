@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>502776796387-tj1q1osqb22s0id48e5ivu176lkjjric.apps.googleusercontent.com</string>
+	<string>25997221758-kkammsulvqptlbgis1u63tv1dfbndvtl.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.502776796387-tj1q1osqb22s0id48e5ivu176lkjjric</string>
+	<string>com.googleusercontent.apps.25997221758-kkammsulvqptlbgis1u63tv1dfbndvtl</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDq6d6Gw8cJ5SNm36KpbFvQMiOyuj73Z7s</string>
+	<string>AIzaSyDSzb4wMSIo5LeXUwCArUPxwpkB750pqW0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>502776796387</string>
+	<string>25997221758</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.customer.truyenmesay</string>
 	<key>PROJECT_ID</key>
-	<string>mesaynovel-e9b4b</string>
+	<string>truyenhay-d086e</string>
 	<key>STORAGE_BUCKET</key>
-	<string>mesaynovel-e9b4b.appspot.com</string>
+	<string>truyenhay-d086e.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:502776796387:ios:39e4a332d06f8da3d0a1d6</string>
+	<string>1:25997221758:ios:daeef36a5bffd5a2f3dd2f</string>
 </dict>
 </plist>

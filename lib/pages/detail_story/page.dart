@@ -168,7 +168,7 @@ class DetailStoryPage extends GetView<DetailStoryController> {
         ),
         20.verticalSpace,
         Container(
-          width: double.infinity,
+          width:controller.bannerAdMedium.size.width.toDouble(),
           height: controller.bannerAdMedium.size.height.toDouble(),
           child: AdWidget(ad: controller.bannerAdMedium),
         ),
