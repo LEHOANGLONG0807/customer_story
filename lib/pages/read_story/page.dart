@@ -34,7 +34,7 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                       ).wrapHeight(25),
                       _buildContainerRead(),
                       Container(
-                        width: controller.bannerAd.size.width.toDouble(),
+                        width: double.infinity,
                         height: controller.bannerAd.size.height.toDouble(),
                         child: AdWidget(ad: controller.bannerAd),
                       ),

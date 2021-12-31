@@ -104,7 +104,6 @@ class ReadStoryController extends GetxController {
     analytics.setCurrentScreen(screenName: Routes.READING_STORY);
     bannerAd.load();
 
-
     /// lấy fontSize từ local
     final _fontSize = await _box.read(KEY_FONT_SIZE);
     if (_fontSize != null && _fontSize is double) {
@@ -494,7 +493,8 @@ class ReadStoryController extends GetxController {
         ad.dispose();
       },
     ),
-  );  final bannerAdMedium2 = BannerAd(
+  );
+  final bannerAdMedium2 = BannerAd(
     adUnitId: AdHelper.bannerAdUnitId,
     request: AdRequest(),
     size: AdSize.mediumRectangle,
@@ -533,7 +533,7 @@ class ReadStoryController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    Future.delayed(2.seconds, () {
+    Future.delayed(4.seconds, () {
       _rewardedAd.show(onUserEarnedReward: (_, a) {});
     });
   }
