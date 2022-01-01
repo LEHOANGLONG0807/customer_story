@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:truyen_chu/theme/theme.dart';
 import '../../../common/common.dart';
 
 import '../../pages.dart';
@@ -15,7 +16,7 @@ class ContainerBottomReadAction extends StatelessWidget {
         width: double.infinity,
         height: _controller.showAction.value ? 130 : 0,
         padding: UIHelper.paddingAll16,
-        color: const Color(0xffD2CDB9),
+        color: AssetColors.colorGreyE7E7E7,
         child: SingleChildScrollView(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,

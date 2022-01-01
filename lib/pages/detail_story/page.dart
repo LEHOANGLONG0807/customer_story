@@ -168,7 +168,7 @@ class DetailStoryPage extends GetView<DetailStoryController> {
         ),
         20.verticalSpace,
         Container(
-          width:controller.bannerAdMedium.size.width.toDouble(),
+          width: controller.bannerAdMedium.size.width.toDouble(),
           height: controller.bannerAdMedium.size.height.toDouble(),
           child: AdWidget(ad: controller.bannerAdMedium),
         ),
@@ -252,8 +252,6 @@ class DetailStoryPage extends GetView<DetailStoryController> {
       color: Colors.white,
       child: Row(
         children: [
-          Expanded(child: Text('Nghe truyện').elevatedButton(onPressed: null)),
-          20.horizontalSpace,
           Expanded(child: Text('Đọc truyện').elevatedButton(onPressed: controller.onTapReadingStory)),
         ],
       ),

@@ -2,6 +2,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:truyen_chu/theme/theme.dart';
 import '../../common/common.dart';
 import 'widget/widget.dart';
 
@@ -15,7 +16,7 @@ class ReadStoryPage extends GetView<ReadStoryController> {
       onWillPop: controller.onBack,
       child: Scaffold(
         key: controller.scaffoldKey,
-        backgroundColor: const Color(0xffDED9C5),
+        backgroundColor: Colors.white,
         body: Obx(() {
           final _index = controller.currentIndexPage.value;
           return Stack(
@@ -30,7 +31,7 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                         _index == 1 ? '' : controller.chapterContentModel.value.title ?? '',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: _theme.textTheme.subtitle1!.text3F2F0E,
+                        style: _theme.textTheme.subtitle1!.textBlack,
                       ).wrapHeight(25),
                       _buildContainerRead(),
                       Container(
@@ -84,13 +85,13 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                         child: Text(
                           _text,
                           textAlign: TextAlign.center,
-                          style: _theme.textTheme.headline5!.text3F2F0E,
+                          style: _theme.textTheme.headline5!.textBlack,
                         ),
                       );
                     }
                     return Text(
                       _text,
-                      style: controller.textStyle.value.text3F2F0E,
+                      style: controller.textStyle.value.textBlack,
                     );
                   },
                 ),
@@ -120,7 +121,7 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                             Text(
                               _text,
                               textAlign: TextAlign.center,
-                              style: _theme.textTheme.headline5!.text3F2F0E,
+                              style: _theme.textTheme.headline5!.textBlack,
                             ),
                           ],
                         );
@@ -130,7 +131,7 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                           children: [
                             Text(
                               _text,
-                              style: controller.textStyle.value.text3F2F0E,
+                              style: controller.textStyle.value.textBlack,
                             ),
                             Container(
                               width: controller.bannerAdMedium2.size.width.toDouble(),
@@ -144,7 +145,7 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                       }
                       return Text(
                         _text,
-                        style: controller.textStyle.value.text3F2F0E,
+                        style: controller.textStyle.value.textBlack,
                       );
                     },
                     itemScrollController: controller.itemScrollController,
@@ -185,7 +186,7 @@ class ReadStoryPage extends GetView<ReadStoryController> {
       duration: 250.milliseconds,
       width: double.infinity,
       height: controller.showAction.value ? 80 : 0,
-      color: const Color(0xffD2CDB9),
+      color: AssetColors.colorGreyE7E7E7,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

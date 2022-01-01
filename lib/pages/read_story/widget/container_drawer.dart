@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:truyen_chu/theme/theme.dart';
 import '../../../common/common.dart';
 
 import '../../pages.dart';
@@ -13,14 +14,16 @@ class ContainerDrawer extends StatelessWidget {
     if (_controller.reverseChapterList.value) {
       _scrollController = ScrollController(initialScrollOffset: _controller.chapterContentModel.value.id * 60 - Get.height / 2);
     } else {
-      _scrollController = ScrollController(initialScrollOffset: (_controller.allChapters.length - _controller.chapterContentModel.value.id) * 60 - Get.height / 2);
+      _scrollController =
+          ScrollController(initialScrollOffset: (_controller.allChapters.length - _controller.chapterContentModel.value.id) * 60 - Get.height / 2);
     }
     return Container(
       width: double.infinity,
-      color: const Color(0xffDED9C5),
+      color: AssetColors.colorGreyE7E7E7,
       child: Column(
         children: [
           _buildContainerHeader(),
+          const Divider(),
           Expanded(
             child: _buildListChapter(),
           ),
@@ -45,7 +48,7 @@ class ContainerDrawer extends StatelessWidget {
         },
         itemCount: _controller.allChapters.length,
         separatorBuilder: (_, int index) => const Divider(height: 0),
-      ).scrollBar(color: Color(0xff3F2F0E), controller: _scrollController),
+      ).scrollBar(color: Colors.black, controller: _scrollController),
     );
   }
 
@@ -60,7 +63,7 @@ class ContainerDrawer extends StatelessWidget {
           title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: _theme.textTheme.subtitle1!.textColor(isSelected ? Color(0xffDF9B34) : Color(0xff3F2F0E)).weight(isSelected ? FontWeight.bold : FontWeight.w500),
+          style: _theme.textTheme.subtitle1!.textColor(isSelected ? Color(0xffDF9B34) : Colors.black).weight(isSelected ? FontWeight.bold : FontWeight.w500),
         ),
       ),
     );
@@ -71,7 +74,6 @@ class ContainerDrawer extends StatelessWidget {
       height: 200,
       padding: const EdgeInsets.fromLTRB(10, 0, 5, 5),
       width: double.infinity,
-      color: const Color(0xffD2CDB9),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
