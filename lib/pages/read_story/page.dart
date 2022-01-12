@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:truyen_chu/theme/theme.dart';
 import '../../common/common.dart';
 import 'widget/widget.dart';
@@ -34,11 +35,12 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                         style: _theme.textTheme.subtitle1!.textBlack,
                       ).wrapHeight(25),
                       _buildContainerRead(),
-                      Container(
-                        width: double.infinity,
-                        height: controller.bannerAd.size.height.toDouble(),
-                        child: AdWidget(ad: controller.bannerAd),
-                      ),
+                      if (!controller.showAction.value)
+                        Container(
+                          width: double.infinity,
+                          height: controller.bannerAd.size.height.toDouble(),
+                          child: AdWidget(ad: controller.bannerAd),
+                        ),
                       if (!controller.showAction.value)
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,118 +68,59 @@ class ReadStoryPage extends GetView<ReadStoryController> {
   Widget _buildContainerRead() {
     return Expanded(
       child: Container(
-          key: controller.pageKey,
-          child: IndexedStack(
-            index: controller.appController.readHorizontal.value ? 0 : 1,
-            children: [
-              ///scroll horizontal
-              Visibility(
-                maintainState: true,
-                visible: controller.appController.readHorizontal.value,
-                child: PageView.builder(
-                  controller: controller.pageController,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: controller.splitTextList.length,
-                  itemBuilder: (context, index) {
-                    final _text = controller.splitTextList[index];
-                    if (index == 0) {
-                      return Center(
-                        child: Text(
-                          _text,
-                          textAlign: TextAlign.center,
-                          style: _theme.textTheme.headline5!.textBlack,
-                        ),
-                      );
-                    }
-                    return Text(
+        key: controller.pageKey,
+        child: NotificationListener<ScrollNotification>(
+          onNotification: controller.listenScrollVerticalChangedChapter,
+          child: ScrollablePositionedList.builder(
+            itemCount: controller.splitTextList.length,
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (context, index) {
+              final _text = controller.splitTextList[index];
+              if (index == 0) {
+                return Column(
+                  children: [
+                    Container(
+                      width: controller.appController.bannerAdMedium.size.width.toDouble(),
+                      height: controller.appController.bannerAdMedium.size.height.toDouble(),
+                      child: AdWidget(
+                        ad: controller.appController.bannerAdMedium,
+                      ),
+                    ),
+                    Text(
+                      _text,
+                      textAlign: TextAlign.center,
+                      style: _theme.textTheme.headline5!.textBlack,
+                    ),
+                  ],
+                );
+              }
+              if (index == controller.splitTextList.length - 1) {
+                return Column(
+                  children: [
+                    Text(
                       _text,
                       style: controller.textStyle.value.textBlack,
-                    );
-                  },
-                ),
-              ),
-
-              /// scroll vertical
-              Visibility(
-                maintainState: true,
-                visible: !controller.appController.readHorizontal.value,
-                child: NotificationListener<ScrollNotification>(
-                  onNotification: controller.listenScrollVerticalChangedChapter,
-                  child: ScrollablePositionedList.builder(
-                    itemCount: controller.splitTextList.length,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final _text = controller.splitTextList[index];
-                      if (index == 0) {
-                        return Column(
-                          children: [
-                            Container(
-                              width: controller.bannerAdMedium.size.width.toDouble(),
-                              height: controller.bannerAdMedium.size.height.toDouble(),
-                              child: AdWidget(
-                                ad: controller.bannerAdMedium,
-                              ),
-                            ),
-                            Text(
-                              _text,
-                              textAlign: TextAlign.center,
-                              style: _theme.textTheme.headline5!.textBlack,
-                            ),
-                          ],
-                        );
-                      }
-                      if (index == controller.splitTextList.length - 1) {
-                        return Column(
-                          children: [
-                            Text(
-                              _text,
-                              style: controller.textStyle.value.textBlack,
-                            ),
-                            Container(
-                              width: controller.bannerAdMedium2.size.width.toDouble(),
-                              height: controller.bannerAdMedium2.size.height.toDouble(),
-                              child: AdWidget(
-                                ad: controller.bannerAdMedium2,
-                              ),
-                            ),
-                          ],
-                        );
-                      }
-                      return Text(
-                        _text,
-                        style: controller.textStyle.value.textBlack,
-                      );
-                    },
-                    itemScrollController: controller.itemScrollController,
-                    itemPositionsListener: controller.itemPositionsListener,
-                  ),
-                ),
-              ),
-
-              ///scroll vertical
-//              SingleChildScrollView(
-//                controller: controller.scrollController,
-//                physics: const BouncingScrollPhysics(),
-//                child: Column(
-//                  children: [
-//                    Center(
-//                      child: Text(
-//                        (controller.chapterContentModel.value.title ?? '').replaceFirst(':', ':\n'),
-//                        textAlign: TextAlign.center,
-//                        style: _theme.textTheme.headline5!.text3F2F0E,
-//                      ),
-//                    ),
-//                    ...controller.splitTextList.map((e) {
-//                      return Text(
-//                        e,
-//                        style: controller.textStyle.value.text3F2F0E,
-//                      );
-//                    }),
-//                  ],
-//                ),
-//              ),
-            ],
-          )),
+                    ),
+                    Container(
+                      width: controller.appController.bannerAdMedium2.size.width.toDouble(),
+                      height: controller.appController.bannerAdMedium2.size.height.toDouble(),
+                      child: AdWidget(
+                        ad: controller.appController.bannerAdMedium2,
+                      ),
+                    ),
+                  ],
+                );
+              }
+              return Text(
+                _text,
+                style: controller.textStyle.value.textBlack,
+              );
+            },
+            itemScrollController: controller.itemScrollController,
+            itemPositionsListener: controller.itemPositionsListener,
+          ),
+        ),
+      ),
     );
   }
 

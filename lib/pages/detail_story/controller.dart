@@ -61,9 +61,11 @@ class DetailStoryController extends GetxController {
 
   final backgroundColor = AssetColors.color4F1F33.obs;
 
+  late RewardedAd _rewardedAd;
+
   @override
   void onInit() {
-    bannerAdMedium.load();
+    _loadRewardedAd();
     super.onInit();
     if (Get.arguments != null) {
       storyId = Get.arguments['id'] ?? -1;
@@ -222,6 +224,7 @@ class DetailStoryController extends GetxController {
   }
 
   void onTapReadingStory() async {
+    _rewardedAd.show(onUserEarnedReward: (_, a) {});
     final _historyLocalModel = await dbService.getStoryHistoryById(storyId: storyId);
     if (_historyLocalModel != null) {
       await Get.toNamed(Routes.READING_STORY, arguments: {
@@ -236,6 +239,7 @@ class DetailStoryController extends GetxController {
   }
 
   void onTapChapter({int? chapterId}) async {
+    _rewardedAd.show(onUserEarnedReward: (_, a) {});
     final _chapterId = chapterId ?? 1;
     await Get.toNamed(Routes.READING_STORY, arguments: {
       'storyId': storyModel.value.id,
@@ -300,17 +304,26 @@ class DetailStoryController extends GetxController {
   }
 
   ///ads
-  final bannerAdMedium = BannerAd(
-    adUnitId: AdHelper.bannerAdUnitId,
-    request: AdRequest(),
-    size: AdSize.mediumRectangle,
-    listener: BannerAdListener(
-      onAdLoaded: (_) {},
-      onAdFailedToLoad: (ad, err) {
-        ad.dispose();
-      },
-    ),
-  );
+  void _loadRewardedAd() {
+    RewardedAd.load(
+      adUnitId: AdHelper.rewardedAdUnitId,
+      request: AdRequest(),
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (ad) {
+          this._rewardedAd = ad;
+
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              _loadRewardedAd();
+            },
+          );
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load a rewarded ad: ${err.message}');
+        },
+      ),
+    );
+  }
 
   @override
   void onClose() {

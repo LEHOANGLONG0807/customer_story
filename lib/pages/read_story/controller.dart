@@ -37,8 +37,6 @@ class ReadStoryController extends GetxController {
 
   final _dynamicSize = DynamicSizeImpl();
 
-  final pageController = PageController();
-
   final ItemScrollController itemScrollController = ItemScrollController();
 
   final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
@@ -90,8 +88,6 @@ class ReadStoryController extends GetxController {
   @override
   void onInit() async {
     _loadRewardedAd();
-    bannerAdMedium.load();
-    bannerAdMedium2.load();
     Wakelock.enable();
     if (Get.arguments != null) {
       storyId = Get.arguments['storyId'] ?? -1;
@@ -116,8 +112,6 @@ class ReadStoryController extends GetxController {
 
     _checkStoryBoardLocal();
 
-    _listenPageController();
-
     _positionsListener();
 
     WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -129,14 +123,6 @@ class ReadStoryController extends GetxController {
 
     _fetchStoryById();
 
-    ever<int>(currentIndexPage, (val) {
-      if (appController.readHorizontal.value) {
-        itemScrollController.jumpTo(index: val - 1);
-      } else {
-        pageController.animateToPage(val - 1, duration: 150.milliseconds, curve: Curves.linear);
-      }
-    });
-
     await analytics.setUserProperty(name: READ_STORY, value: '$storyId');
     await analytics.logEvent(name: EVENT_READ, parameters: {'id': storyId});
   }
@@ -146,6 +132,10 @@ class ReadStoryController extends GetxController {
   Future fetchChapterContentById() async {
     try {
       EasyLoading.show();
+      appController.bannerAdMedium.dispose();
+      appController.bannerAdMedium.load();
+      appController.bannerAdMedium2.dispose();
+      appController.bannerAdMedium2.load();
       final _response = await chapterRepository.fetchChapterContentById(chapterId: chapterId, storyId: storyId);
       chapterContentModel.value = _response;
       storyHistoryLocal.chapterId = chapterId;
@@ -166,7 +156,6 @@ class ReadStoryController extends GetxController {
   Future _initLoad() async {
     _getSplitText();
     currentIndexPage.value = _firstTimeLoad ? _initPageIndex + 1 : 1;
-    pageController.animateToPage(_firstTimeLoad ? _initPageIndex : 0, duration: 150.milliseconds, curve: Curves.linear);
     try {
       await Future.delayed(300.milliseconds);
       itemScrollController.jumpTo(index: _firstTimeLoad ? _initPageIndex : 0);
@@ -312,9 +301,6 @@ class ReadStoryController extends GetxController {
       return;
     }
     await onTapChooseChapter(chapterId - 1);
-    if (appController.readHorizontal.value) {
-      pageController.jumpToPage(splitTextList.length - 1);
-    }
   }
 
   ///chọn chương
@@ -370,25 +356,6 @@ class ReadStoryController extends GetxController {
 
   void onTapScreen() {
     showAction.value = !showAction.value;
-  }
-
-  void _listenPageController() {
-    pageController.addListener(() {
-      if (!appController.readHorizontal.value) return;
-      showAction.value = false;
-      currentIndexPage.value = (pageController.page! + 1.4).toInt();
-      storyHistoryLocal.pageIndex = currentIndexPage.value;
-
-      if (pageController.offset - 60 > pageController.position.maxScrollExtent && _isNextChapter) {
-        _isNextChapter = false;
-        onTapChapterNext();
-      }
-      if (pageController.offset + 60 < pageController.position.minScrollExtent && _isPreChapter) {
-        _isPreChapter = false;
-        _onTapSwipePreRead();
-      }
-      _saveCurrentStoryReading();
-    });
   }
 
   ///listen position
@@ -483,28 +450,6 @@ class ReadStoryController extends GetxController {
       },
     ),
   );
-  final bannerAdMedium = BannerAd(
-    adUnitId: AdHelper.bannerAdUnitId,
-    request: AdRequest(),
-    size: AdSize.mediumRectangle,
-    listener: BannerAdListener(
-      onAdLoaded: (_) {},
-      onAdFailedToLoad: (ad, err) {
-        ad.dispose();
-      },
-    ),
-  );
-  final bannerAdMedium2 = BannerAd(
-    adUnitId: AdHelper.bannerAdUnitId,
-    request: AdRequest(),
-    size: AdSize.mediumRectangle,
-    listener: BannerAdListener(
-      onAdLoaded: (_) {},
-      onAdFailedToLoad: (ad, err) {
-        ad.dispose();
-      },
-    ),
-  );
 
   late RewardedAd _rewardedAd;
 
@@ -531,17 +476,8 @@ class ReadStoryController extends GetxController {
   }
 
   @override
-  void onReady() {
-    super.onReady();
-    Future.delayed(4.seconds, () {
-      _rewardedAd.show(onUserEarnedReward: (_, a) {});
-    });
-  }
-
-  @override
   void onClose() {
     Wakelock.disable();
-    pageController.dispose();
     bannerAd.dispose();
     _rewardedAd.dispose();
     itemPositionsListener.itemPositions.removeListener(() {});

@@ -495,7 +495,7 @@
         <entry key="google_mobile_ads">
           <value>
             <list>
-              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/google_mobile_ads-1.0.1/lib" />
+              <option value="C:/src/flutter/.pub-cache/git/googleads-mobile-flutter-b2051250b83633c5d3a533c6c82bee8728243ec6/packages/google_mobile_ads/lib" />
             </list>
           </value>
         </entry>
@@ -1097,6 +1097,7 @@
       </option>
     </properties>
     <CLASSES>
+      <root url="file://C:/src/flutter/.pub-cache/git/googleads-mobile-flutter-b2051250b83633c5d3a533c6c82bee8728243ec6/packages/google_mobile_ads/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/_fe_analyzer_shared-22.0.0/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/analyzer-1.7.1/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.1.6/lib" />
@@ -1164,7 +1165,6 @@
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.3.8/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/get_storage-2.0.3/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/glob-2.0.1/lib" />
-      <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/google_mobile_ads-1.0.1/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/graphs-2.1.0/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/hive-2.0.4/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/hive_generator-1.1.1/lib" />

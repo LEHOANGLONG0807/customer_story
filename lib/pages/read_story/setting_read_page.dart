@@ -29,7 +29,7 @@ class SettingReadPage extends StatelessWidget {
           Row(),
           _buildSettingFontSize(),
           20.verticalSpace,
-          _buildScrollDirectionStory(),
+          // _buildScrollDirectionStory(),
           const Spacer(),
           Text('Lưu lại').elevatedButton(
             onPressed: () {

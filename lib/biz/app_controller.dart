@@ -4,6 +4,8 @@ import 'package:battery/battery.dart';
 import 'package:device_info/device_info.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:truyen_chu/common/helper/ad_helper.dart';
 import '../constants.dart';
 import '../main.dart';
 import '../models/models.dart';
@@ -24,6 +26,9 @@ class AppController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    bannerAdMedium.load();
+    bannerAdMedium2.load();
+    bannerAdMedium3.load();
     _getSettingRead();
     _listenBattery();
     _getDeviceId();
@@ -115,6 +120,40 @@ class AppController extends GetxController {
     readHorizontal.value = isHorizontal;
     _box.write(SCROLL_DIRECTION, isHorizontal);
   }
+
+  final bannerAdMedium = BannerAd(
+    adUnitId: AdHelper.bannerAdUnitId,
+    request: AdRequest(),
+    size: AdSize.mediumRectangle,
+    listener: BannerAdListener(
+      onAdLoaded: (_) {},
+      onAdFailedToLoad: (ad, err) {
+        ad.dispose();
+      },
+    ),
+  );
+  final bannerAdMedium2 = BannerAd(
+    adUnitId: AdHelper.bannerAdUnitId,
+    request: AdRequest(),
+    size: AdSize.mediumRectangle,
+    listener: BannerAdListener(
+      onAdLoaded: (ad) {},
+      onAdFailedToLoad: (ad, err) {
+        ad.dispose();
+      },
+    ),
+  );
+  final bannerAdMedium3 = BannerAd(
+    adUnitId: AdHelper.bannerAdUnitId,
+    request: AdRequest(),
+    size: AdSize.mediumRectangle,
+    listener: BannerAdListener(
+      onAdLoaded: (ad) {},
+      onAdFailedToLoad: (ad, err) {
+        ad.dispose();
+      },
+    ),
+  );
 
   @override
   void onClose() {

@@ -58,8 +58,11 @@ class HomeController extends GetxController {
 
   final showPopupStoryLastTime = false.obs;
 
+  late RewardedAd _rewardedAd;
+
   @override
   void onInit() {
+    _loadRewardedAd();
     tags.addAll(appController.mainCategory);
     tags.insert(0, TagModel(id: 0, name: 'Tất cả'));
     super.onInit();
@@ -193,6 +196,7 @@ class HomeController extends GetxController {
   }
 
   void onTapContinueReading() {
+    _rewardedAd.show(onUserEarnedReward: (_, a) {});
     Get.toNamed(Routes.READING_STORY, arguments: {
       'storyId': storyHistory!.id,
       'chapterId': storyHistory!.chapterId,
@@ -217,5 +221,26 @@ class HomeController extends GetxController {
       storyHistory = StoryHistoryLocalModel.fromJson(jsonDecode(_json));
       showPopupStoryLastTime.value = true;
     }
+  }
+
+  void _loadRewardedAd() {
+    RewardedAd.load(
+      adUnitId: AdHelper.rewardedAdUnitId,
+      request: AdRequest(),
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (ad) {
+          this._rewardedAd = ad;
+
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              _loadRewardedAd();
+            },
+          );
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load a rewarded ad: ${err.message}');
+        },
+      ),
+    );
   }
 }
