@@ -35,7 +35,7 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                         style: _theme.textTheme.subtitle1!.textBlack,
                       ).wrapHeight(25),
                       _buildContainerRead(),
-                      if (!controller.showAction.value)
+                      if (!controller.showAction.value && controller.appController.showAds)
                         Container(
                           width: double.infinity,
                           height: controller.bannerAd.size.height.toDouble(),
@@ -79,13 +79,14 @@ class ReadStoryPage extends GetView<ReadStoryController> {
               if (index == 0) {
                 return Column(
                   children: [
-                    Container(
-                      width: controller.appController.bannerAdMedium.size.width.toDouble(),
-                      height: controller.appController.bannerAdMedium.size.height.toDouble(),
-                      child: AdWidget(
-                        ad: controller.appController.bannerAdMedium,
+                    if (controller.appController.showAds)
+                      Container(
+                        width: controller.appController.bannerAdMedium.size.width.toDouble(),
+                        height: controller.appController.bannerAdMedium.size.height.toDouble(),
+                        child: AdWidget(
+                          ad: controller.appController.bannerAdMedium,
+                        ),
                       ),
-                    ),
                     Text(
                       _text,
                       textAlign: TextAlign.center,
@@ -101,13 +102,14 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                       _text,
                       style: controller.textStyle.value.textBlack,
                     ),
-                    Container(
-                      width: controller.appController.bannerAdMedium2.size.width.toDouble(),
-                      height: controller.appController.bannerAdMedium2.size.height.toDouble(),
-                      child: AdWidget(
-                        ad: controller.appController.bannerAdMedium2,
+                    if (controller.appController.showAds)
+                      Container(
+                        width: controller.appController.bannerAdMedium2.size.width.toDouble(),
+                        height: controller.appController.bannerAdMedium2.size.height.toDouble(),
+                        child: AdWidget(
+                          ad: controller.appController.bannerAdMedium2,
+                        ),
                       ),
-                    ),
                   ],
                 );
               }

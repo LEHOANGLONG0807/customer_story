@@ -167,11 +167,12 @@ class DetailStoryPage extends GetView<DetailStoryController> {
           ],
         ),
         20.verticalSpace,
-        Container(
-          width: controller.appController.bannerAdMedium3.size.width.toDouble(),
-          height: controller.appController.bannerAdMedium3.size.height.toDouble(),
-          child: AdWidget(ad: controller.appController.bannerAdMedium3),
-        ),
+        if (controller.appController.showAds)
+          Container(
+            width: controller.appController.bannerAdMedium3.size.width.toDouble(),
+            height: controller.appController.bannerAdMedium3.size.height.toDouble(),
+            child: AdWidget(ad: controller.appController.bannerAdMedium3),
+          ),
         20.verticalSpace,
         _buildIntroduce(),
         const Divider(height: 40),

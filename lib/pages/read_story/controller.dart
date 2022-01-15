@@ -147,7 +147,7 @@ class ReadStoryController extends GetxController {
       EasyLoading.dismiss();
       EasyLoading.showError('Đã xảy ra lỗi!');
     }
-    if (chapterId % 10 == 0) {
+    if (chapterId % 10 == 0 && appController.showAds) {
       _rewardedAd.show(onUserEarnedReward: (_, a) {});
     }
   }

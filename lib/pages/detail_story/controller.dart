@@ -224,7 +224,7 @@ class DetailStoryController extends GetxController {
   }
 
   void onTapReadingStory() async {
-    _rewardedAd.show(onUserEarnedReward: (_, a) {});
+    if (appController.showAds) _rewardedAd.show(onUserEarnedReward: (_, a) {});
     final _historyLocalModel = await dbService.getStoryHistoryById(storyId: storyId);
     if (_historyLocalModel != null) {
       await Get.toNamed(Routes.READING_STORY, arguments: {
@@ -239,7 +239,7 @@ class DetailStoryController extends GetxController {
   }
 
   void onTapChapter({int? chapterId}) async {
-    _rewardedAd.show(onUserEarnedReward: (_, a) {});
+    if (appController.showAds) _rewardedAd.show(onUserEarnedReward: (_, a) {});
     final _chapterId = chapterId ?? 1;
     await Get.toNamed(Routes.READING_STORY, arguments: {
       'storyId': storyModel.value.id,

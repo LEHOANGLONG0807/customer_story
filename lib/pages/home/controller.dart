@@ -196,7 +196,7 @@ class HomeController extends GetxController {
   }
 
   void onTapContinueReading() {
-    _rewardedAd.show(onUserEarnedReward: (_, a) {});
+    if (appController.showAds) _rewardedAd.show(onUserEarnedReward: (_, a) {});
     Get.toNamed(Routes.READING_STORY, arguments: {
       'storyId': storyHistory!.id,
       'chapterId': storyHistory!.chapterId,

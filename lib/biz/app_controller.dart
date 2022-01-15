@@ -23,9 +23,23 @@ class AppController extends GetxController {
 
   String? deviceId;
 
+  bool showAds = true;
+
   @override
   void onInit() {
     super.onInit();
+    bannerAdMedium = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      request: AdRequest(),
+      size: AdSize.mediumRectangle,
+      listener: BannerAdListener(
+        onAdLoaded: (_) {},
+        onAdFailedToLoad: (ad, err) {
+          showAds = false;
+          ad.dispose();
+        },
+      ),
+    );
     bannerAdMedium.load();
     bannerAdMedium2.load();
     bannerAdMedium3.load();
@@ -121,17 +135,8 @@ class AppController extends GetxController {
     _box.write(SCROLL_DIRECTION, isHorizontal);
   }
 
-  final bannerAdMedium = BannerAd(
-    adUnitId: AdHelper.bannerAdUnitId,
-    request: AdRequest(),
-    size: AdSize.mediumRectangle,
-    listener: BannerAdListener(
-      onAdLoaded: (_) {},
-      onAdFailedToLoad: (ad, err) {
-        ad.dispose();
-      },
-    ),
-  );
+  late BannerAd bannerAdMedium;
+
   final bannerAdMedium2 = BannerAd(
     adUnitId: AdHelper.bannerAdUnitId,
     request: AdRequest(),
