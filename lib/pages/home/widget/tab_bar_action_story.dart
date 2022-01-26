@@ -67,6 +67,7 @@ class _TabBarTypeActionStoryState extends State<TabBarTypeActionStory> with Sing
             labelColor: Colors.black,
             indicatorSize: TabBarIndicatorSize.label,
             indicatorColor: theme.primaryColor,
+            isScrollable: true,
             onTap: (val) async {
               if (val == 1) {
                 _controller.feedBackStoryListen();

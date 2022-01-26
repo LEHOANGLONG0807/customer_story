@@ -48,7 +48,7 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                             Text('$_index/${controller.splitTextList.length}'),
                             ContainerBattery(),
                           ],
-                        ).wrapHeight(20),
+                        ).wrapHeight(20).paddingSymmetric(horizontal: 10),
                     ],
                   ).paddingAll(10),
                 ),

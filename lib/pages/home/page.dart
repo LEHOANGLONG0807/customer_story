@@ -22,8 +22,8 @@ class HomePage extends GetView<HomeController> {
       backgroundColor: AssetColors.colorBlueF2F4FF,
       body: SafeArea(
         child: TabBarTypeActionStory(
-          tabLabels: ['Đọc truyện', 'Nghe truyện'],
-          pages: [KeepAlivePage(child: _buildContainerStoryRead()), PageViewStoryListen()],
+          tabLabels: ['Đọc truyện',],
+          pages: [KeepAlivePage(child: _buildContainerStoryRead())],
         ),
       ),
     );

@@ -16,13 +16,14 @@ class ClassifyPage extends GetView<ClassifyController> {
       appBar: AppBar(
         title:  Text('Phân loại',style: _textTheme.headline6!.textBlack,),
       ),
-      body: TabBarTypeClassify(tabLabels: [
-        'Truyện đọc',
-        'Truyện nghe'
-      ], pages: [
-        TabViewStoryRead(),
-        PageViewStoryListen(),
-      ]),
+      body:  TabViewStoryRead(),
+      // TabBarTypeClassify(tabLabels: [
+      //   'Truyện đọc',
+      //   'Truyện nghe'
+      // ], pages: [
+      //   TabViewStoryRead(),
+      //   PageViewStoryListen(),
+      // ]),
     );
   }
 }
