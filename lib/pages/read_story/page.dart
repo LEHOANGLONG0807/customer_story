@@ -50,7 +50,7 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                           ],
                         ).wrapHeight(20),
                     ],
-                  ).paddingOnly(top: 10, right: 20, left: 20, bottom: 10),
+                  ).paddingAll(10),
                 ),
               ),
               _buildAppBar(),

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 class APIService {
   Dio? dio;
-  final String basePath = 'http://apx.mesaynovel.com/api';
+  final String basePath = 'http://guess.truyen.live/api';
 
   APIService() {
     final headers = <String, dynamic>{
