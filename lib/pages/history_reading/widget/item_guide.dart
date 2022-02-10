@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:popover/popover.dart';
+import 'package:truyen_chu/common/common.dart';
 
 class ItemGuide extends StatelessWidget {
   @override
@@ -12,7 +13,15 @@ class ItemGuide extends StatelessWidget {
           bodyBuilder: (context) => Container(
             padding: const EdgeInsets.all(12),
             color: Colors.white,
-            child: Text('Vuốt sang trái để xóa truyện trong lịch sử.'),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Vuốt sang trái để xóa truyện trong lịch sử.'),
+                10.verticalSpace,
+                Text('Bấm button + để thêm vào tủ truyện'),
+              ],
+            ),
           ),
           onPop: () => print('Popover was popped!'),
           direction: PopoverDirection.bottom,
@@ -21,7 +30,7 @@ class ItemGuide extends StatelessWidget {
           arrowWidth: 10,
         );
       },
-      icon: const Icon(Icons.error_outline),
+      icon: const Icon(Icons.speaker_notes_outlined),
     );
   }
 }

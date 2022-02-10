@@ -19,7 +19,7 @@ class ContainerDrawer extends StatelessWidget {
     }
     return Container(
       width: double.infinity,
-      color: AssetColors.colorGreyE7E7E7,
+      color: _theme.scaffoldBackgroundColor,
       child: Column(
         children: [
           _buildContainerHeader(),
@@ -63,7 +63,7 @@ class ContainerDrawer extends StatelessWidget {
           title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: _theme.textTheme.subtitle1!.textColor(isSelected ? Color(0xffDF9B34) : Colors.black).weight(isSelected ? FontWeight.bold : FontWeight.w500),
+          style: _theme.textTheme.subtitle1!.textColor(isSelected ? AssetColors.primary : Colors.black).weight(isSelected ? FontWeight.bold : FontWeight.w500),
         ),
       ),
     );
@@ -74,10 +74,11 @@ class ContainerDrawer extends StatelessWidget {
       height: 200,
       padding: const EdgeInsets.fromLTRB(10, 0, 5, 5),
       width: double.infinity,
+      color: _theme.primaryColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          IconButton(onPressed: Get.back, icon: const Icon(Icons.close, size: 26)),
+          IconButton(onPressed: Get.back, icon: const Icon(Icons.close, size: 26,color: Colors.white,)),
           _buildContainerStory(),
           const Spacer(),
           _buildTotalChapterAndSort(),
@@ -95,7 +96,7 @@ class ContainerDrawer extends StatelessWidget {
           14.horizontalSpace,
           _buildContent(),
           10.horizontalSpace,
-          const Icon(Icons.arrow_forward_ios),
+          const Icon(Icons.arrow_forward_ios,color: Colors.white,),
         ],
       ).wrapHeight(100),
     );
@@ -107,13 +108,13 @@ class ContainerDrawer extends StatelessWidget {
       children: [
         Text(
           '${_controller.storyModel?.chap ?? 0} chương - ${(_controller.storyModel?.isFull ?? false) ? 'Hoàn thành' : 'Đang ra'}',
-          style: _theme.textTheme.subtitle1!.regular.text595959,
+          style: _theme.textTheme.subtitle1!.regular.textWhite,
         ),
         InkWell(
           onTap: _controller.onTapSortChapter,
           child: Text(
             'Đảo thứ tự',
-            style: _theme.textTheme.subtitle1!.text3F2F0E,
+            style: _theme.textTheme.subtitle1!.textWhite,
           ),
         )
       ],
@@ -144,14 +145,14 @@ class ContainerDrawer extends StatelessWidget {
             _controller.storyModel?.title ?? '',
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
-            style: _theme.textTheme.subtitle1!.text3F2F0E.size(18).medium.heightLine(20),
+            style: _theme.textTheme.subtitle1!.textWhite.size(18).semiBold.heightLine(20),
           ),
           10.horizontalSpace,
           Text(
             _controller.storyModel?.authorName ?? '',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: _theme.textTheme.subtitle1!.regular.text595959,
+            style: _theme.textTheme.subtitle1!.regular.textWhite,
           ),
         ],
       ),

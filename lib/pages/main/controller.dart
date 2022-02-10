@@ -17,6 +17,7 @@ class MainController extends GetxController {
       BottomNavBarModel(icon: 'ic_home', label: 'Trang chủ', page: HomePage()),
       BottomNavBarModel(icon: 'ic_classify', label: 'Phân Loại', page: ClassifyPage()),
       BottomNavBarModel(icon: 'ic_story_board', label: 'Tủ truyện', page: StoryBoardPage()),
+      BottomNavBarModel(icon: 'ic_story_board', label: 'Lịch Sử', page: HistoryReadingPage()),
     ];
   }
 
@@ -30,6 +31,10 @@ class MainController extends GetxController {
     }
     if (index == 2) {
       analytics.setCurrentScreen(screenName: Routes.STORY_BOARD);
+    }
+    if (index == 3) {
+      Get.find<HistoryReadingController>().initLoadData();
+      analytics.setCurrentScreen(screenName: Routes.HISTORY_READING);
     }
   }
 

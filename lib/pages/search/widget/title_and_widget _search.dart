@@ -15,7 +15,7 @@ class TitleAndWidgetSearch extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: _theme.textTheme.subtitle1).paddingSymmetric(horizontal: paddingTitle),
+        Text(title, style: _theme.textTheme.headline6).paddingSymmetric(horizontal: paddingTitle),
         20.verticalSpace,
         child,
       ],

@@ -14,7 +14,7 @@ class SettingReadPage extends StatelessWidget {
     _fontSize.value = _controller.textStyle.value.fontSize!;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cài đặt'),
+        title: Text('Cài đặt',style: _theme.textTheme.headline6!.textWhite,),
       ),
       body: _buildContent(),
     );

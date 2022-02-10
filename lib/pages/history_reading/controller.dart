@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../biz/biz.dart';
@@ -19,10 +20,10 @@ class HistoryReadingController extends GetxController {
   void onInit() {
     super.onInit();
     analytics.setCurrentScreen(screenName: Routes.HISTORY_READING);
-    _initLoadData();
+    initLoadData();
   }
 
-  void _initLoadData() async {
+  void initLoadData() async {
     try {
       EasyLoading.show();
       await _fetchStoryHistoryLocal();
@@ -45,7 +46,7 @@ class HistoryReadingController extends GetxController {
       final _response = await dbService.addStoryBoard(model: _boardLocalModel);
       EasyLoading.dismiss();
       if (_response) {
-        EasyLoading.showSuccess('Thêm vào tủ truyện thành công!');
+        showSnackBarSuccess(message: 'Thêm vào tủ truyện thành công!');
         _appController.isRefreshStoryBoard.value = true;
       }
 
@@ -73,9 +74,9 @@ class HistoryReadingController extends GetxController {
       if (_response) {
         listStory.removeWhere((element) => element.id == id);
         listStory.refresh();
-        EasyLoading.showSuccess('Xóa thành công!');
+        showSnackBarSuccess(message: 'Xóa thành công!');
       } else {
-        EasyLoading.showError('Xóa thất bại!');
+        showSnackBarFailed(message: 'Xóa thất bại!');
       }
     } catch (e) {
       EasyLoading.dismiss();
@@ -92,4 +93,12 @@ class HistoryReadingController extends GetxController {
     });
     _fetchStoryHistoryLocal();
   }
+}
+
+void showSnackBarSuccess({required String message}) {
+  Get.snackbar('Thành công', message, backgroundColor: Colors.green,colorText: Colors.white);
+}
+
+void showSnackBarFailed({required String message}) {
+  Get.snackbar('Lỗi', message, backgroundColor: Colors.red,colorText: Colors.white);
 }

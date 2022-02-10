@@ -48,38 +48,18 @@ class _TabViewStoryReadState extends State<TabViewStoryRead> with SingleTickerPr
 
   Widget _buildTabBar() {
     final theme = Theme.of(context);
-    return Obx(
-      () => TabBar(
-        controller: _tabController,
-        unselectedLabelStyle: theme.textTheme.subtitle1!.regular,
-        unselectedLabelColor: theme.hintColor,
-        labelStyle: theme.textTheme.subtitle1,
-        labelColor: Colors.black,
-        isScrollable: true,
-        labelPadding: EdgeInsets.only(right: 10),
-        tabs: _listTitle.asMap().keys.map((index) {
-          final _isFocus = index == _currentIndex.value;
-          return Container(
-            height: 47,
-            padding: UIHelper.horizontalEdgeInsets20,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-              color: _isFocus ? theme.primaryColor : AssetColors.colorGreyE7E7E7,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  _listTitle[index],
-                  style: theme.textTheme.subtitle1!.weight(_isFocus ? FontWeight.bold : FontWeight.normal),
-                ),
-              ],
-            ),
-          );
-        }).toList(),
-        onTap: (index) => _currentIndex.value = index,
-        indicator: const BoxDecoration(),
-      ),
+    return TabBar(
+      controller: _tabController,
+      unselectedLabelStyle: theme.textTheme.subtitle1!.regular,
+      unselectedLabelColor: theme.hintColor,
+      labelStyle: theme.textTheme.subtitle1,
+      labelColor: Colors.black,
+      labelPadding: EdgeInsets.only(right: 10),
+      tabs: _listTitle.map((item) {
+        return Tab(text: item);
+      }).toList(),
+      onTap: (index) => _currentIndex.value = index,
+      indicatorColor: AssetColors.primary,
     );
   }
 

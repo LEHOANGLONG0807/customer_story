@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../theme/theme.dart';
+import 'package:truyen_chu/common/common.dart';
 
 class CachedImageNetworkWidget extends StatelessWidget {
   final String url;
@@ -40,9 +41,7 @@ class CachedImageNetworkWidget extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       color: AssetColors.shimmerBaseColor,
-      child: const Icon(
-        Icons.error,
-      ),
+      child: Image.asset('img_splash'.assetPathPNG,fit: BoxFit.cover,),
     );
   }
 }

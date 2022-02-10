@@ -16,7 +16,13 @@ class ItemStoryInList extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        height: 105,
+        height: 115,
+        padding: const EdgeInsets.all(8),
+
+        decoration: BoxDecoration(
+            color: Colors.white,
+          borderRadius: BorderRadius.circular(10)
+        ),
         margin: UIHelper.horizontalEdgeInsets20,
         child: Row(
           children: [

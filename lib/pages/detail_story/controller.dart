@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:truyen_chu/common/common.dart';
+import 'package:truyen_chu/pages/pages.dart';
 import 'package:truyen_chu/theme/theme.dart';
 import '../../biz/app_controller.dart';
 import '../../main.dart';
@@ -21,7 +22,8 @@ class DetailStoryController extends GetxController {
 
   final DBService dbService;
 
-  DetailStoryController({required this.chapterRepository, required this.storyRepository, required this.dbService});
+  DetailStoryController(
+      {required this.chapterRepository, required this.storyRepository, required this.dbService});
 
   int storyId = -1;
 
@@ -59,7 +61,7 @@ class DetailStoryController extends GetxController {
 
   int _totalPageChapter = 0;
 
-  final backgroundColor = AssetColors.color4F1F33.obs;
+  final backgroundColor = AssetColors.primary.obs;
 
   late RewardedAd _rewardedAd;
 
@@ -93,7 +95,7 @@ class DetailStoryController extends GetxController {
       EasyLoading.dismiss();
       _checkStoryBoardLocal();
       final _random = Random().nextInt(8);
-      backgroundColor.value = AssetColors.colorRandomDetail[_random];
+      backgroundColor.value = AssetColors.primary;
     } catch (e) {
       EasyLoading.dismiss();
       EasyLoading.showError('Đã xảy ra lỗi!');
@@ -112,7 +114,10 @@ class DetailStoryController extends GetxController {
       await analytics.setUserProperty(name: DETAIL_STORY, value: '${storyModel.value.id}');
       await analytics.logEvent(name: EVENT_DETAIL, parameters: {'id': storyModel.value.id});
     } else {
-      Get.dialog(DialogOneButton(title: 'Thông báo', message: 'Truyện đã bị xóa\nVui lòng chọn truyện khác.', titleButton: 'Đồng ý'));
+      Get.dialog(DialogOneButton(
+          title: 'Thông báo',
+          message: 'Truyện đã bị xóa\nVui lòng chọn truyện khác.',
+          titleButton: 'Đồng ý'));
       return;
     }
   }
@@ -122,7 +127,8 @@ class DetailStoryController extends GetxController {
       return;
     }
     _loading = true;
-    final _response = await chapterRepository.fetchChapterTitleById(storyId: storyId, page: _currentPage);
+    final _response =
+        await chapterRepository.fetchChapterTitleById(storyId: storyId, page: _currentPage);
     final _list = _response.items;
     if (_totalPageChapter == 0) {
       _totalPageChapter = _response.totalPages;
@@ -153,7 +159,7 @@ class DetailStoryController extends GetxController {
       final _boardLocalModel = storyModel.value.toStoryBroadLocalModel;
       final _response = await dbService.addStoryBoard(model: _boardLocalModel);
       if (_response) {
-        EasyLoading.showSuccess('Thêm vào tủ truyện thành công!');
+        showSnackBarSuccess(message: 'Thêm vào tủ truyện thành công!');
         showButtonAddBoard.value = false;
         appController.isRefreshStoryBoard.value = true;
       }
@@ -190,7 +196,8 @@ class DetailStoryController extends GetxController {
       return;
     }
     _loading = true;
-    final _response = await chapterRepository.fetchChapterTitleById(storyId: storyId, page: _currentPage);
+    final _response =
+        await chapterRepository.fetchChapterTitleById(storyId: storyId, page: _currentPage);
     final _list = _response.items;
     _list.sort((a, b) => b.id.compareTo(a.id));
     if (_currentPage > 1) {
@@ -208,7 +215,10 @@ class DetailStoryController extends GetxController {
     await analytics.setUserProperty(name: AUTHOR_STORY, value: '${storyModel.value.authorId}');
     await analytics.logEvent(name: EVENT_AUTHOR, parameters: {'id': storyModel.value.authorId});
     if (_isFormList) {
-      final _args = {'title': storyModel.value.authorName ?? '', 'url': '/stories/?author_id=${storyModel.value.authorId ?? -1}'};
+      final _args = {
+        'title': storyModel.value.authorName ?? '',
+        'url': '/stories/?author_id=${storyModel.value.authorId ?? -1}'
+      };
       Get.back(result: _args);
     } else {
       final _result = await Get.toNamed(Routes.LIST_STORY, arguments: {
@@ -255,9 +265,11 @@ class DetailStoryController extends GetxController {
   void onTapSendRatting() async {
     try {
       EasyLoading.show();
-      final _response = await storyRepository.reviewStory(storyId: storyId, star: countStar.value.toInt());
+      final _response =
+          await storyRepository.reviewStory(storyId: storyId, star: countStar.value.toInt());
       if (_response) {
-        EasyLoading.showSuccess('Đánh giá thành công!');
+        showSnackBarSuccess(message: 'Đánh giá thành công!');
+
         showReview.value = false;
       }
       EasyLoading.dismiss();
@@ -289,10 +301,15 @@ class DetailStoryController extends GetxController {
     });
   }
 
-  String replaceHtmlData(String content, int maxSubString, {String firstStart = "[", String lastEnd = "]"}) {
-    return content.replaceFirst(subStringBetweenTwo(content, firstStart, lastEnd), "").length < maxSubString + 10
+  String replaceHtmlData(String content, int maxSubString,
+      {String firstStart = "[", String lastEnd = "]"}) {
+    return content.replaceFirst(subStringBetweenTwo(content, firstStart, lastEnd), "").length <
+            maxSubString + 10
         ? content.replaceFirst(subStringBetweenTwo(content, firstStart, lastEnd), "")
-        : content.replaceFirst(subStringBetweenTwo(content, firstStart, lastEnd), "").substring(0, maxSubString) + "...";
+        : content
+                .replaceFirst(subStringBetweenTwo(content, firstStart, lastEnd), "")
+                .substring(0, maxSubString) +
+            "...";
   }
 
   String subStringBetweenTwo(String content, String start, String end) {

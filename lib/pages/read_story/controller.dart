@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:truyen_chu/pages/history_reading/controller.dart';
 import 'package:wakelock/wakelock.dart';
 import '../../biz/biz.dart';
 import '../../main.dart';
@@ -25,7 +26,8 @@ class ReadStoryController extends GetxController {
 
   final DBService dbService;
 
-  ReadStoryController({required this.chapterRepository, required this.storyRepository, required this.dbService});
+  ReadStoryController(
+      {required this.chapterRepository, required this.storyRepository, required this.dbService});
 
   AppController get appController => Get.find();
 
@@ -136,7 +138,8 @@ class ReadStoryController extends GetxController {
       appController.bannerAdMedium.load();
       appController.bannerAdMedium2.dispose();
       appController.bannerAdMedium2.load();
-      final _response = await chapterRepository.fetchChapterContentById(chapterId: chapterId, storyId: storyId);
+      final _response =
+          await chapterRepository.fetchChapterContentById(chapterId: chapterId, storyId: storyId);
       chapterContentModel.value = _response;
       storyHistoryLocal.chapterId = chapterId;
 
@@ -160,7 +163,10 @@ class ReadStoryController extends GetxController {
       await Future.delayed(300.milliseconds);
       itemScrollController.jumpTo(index: _firstTimeLoad ? _initPageIndex : 0);
     } catch (e) {
-      itemScrollController.scrollTo(index: _firstTimeLoad ? _initPageIndex - 1 : 0, duration: 150.milliseconds, curve: Curves.linear);
+      itemScrollController.scrollTo(
+          index: _firstTimeLoad ? _initPageIndex - 1 : 0,
+          duration: 150.milliseconds,
+          curve: Curves.linear);
     }
 
     _firstTimeLoad = false;
@@ -170,7 +176,8 @@ class ReadStoryController extends GetxController {
 
   void _fetchAllChapterTitle() async {
     try {
-      final _response = await chapterRepository.fetchChapterTitleById(storyId: storyId, page: _currentPageChapter);
+      final _response = await chapterRepository.fetchChapterTitleById(
+          storyId: storyId, page: _currentPageChapter);
       final _list = _response.items;
       if (_list.length >= 50 && _currentPageChapter < _response.totalPages) {
         _currentPageChapter++;
@@ -224,7 +231,7 @@ class ReadStoryController extends GetxController {
       final _boardLocalModel = storyModel!.toStoryBroadLocalModel;
       final _response = await dbService.addStoryBoard(model: _boardLocalModel);
       if (_response) {
-        EasyLoading.showSuccess('Thêm vào tủ truyện thành công!');
+        showSnackBarSuccess(message: 'Thêm vào tủ truyện thành công!');
         showButtonAddBoard.value = false;
         appController.isRefreshStoryBoard.value = true;
       }

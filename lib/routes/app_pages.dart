@@ -18,6 +18,7 @@ abstract class AppPages {
         BindingsBuilder.put(() => MainController()),
         BindingsBuilder.put(() => StoryBoardController(dbService: Get.find())),
         BindingsBuilder.put(() => ClassifyController()),
+        BindingsBuilder.put(() => HistoryReadingController(dbService: Get.find())),
       ],
     ),
     GetPage(

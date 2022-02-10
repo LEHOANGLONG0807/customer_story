@@ -11,7 +11,7 @@ class HistoryReadingPage extends GetView<HistoryReadingController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lịch sử truyện đã đọc',style: _textTheme.headline6!.textBlack,),
+        title: Text('Lịch sử',style: _textTheme.headline6!.textWhite,),
         actions: [ItemGuide()],
       ),
       body: Obx(

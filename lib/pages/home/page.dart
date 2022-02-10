@@ -21,11 +21,28 @@ class HomePage extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: AssetColors.colorBlueF2F4FF,
       body: SafeArea(
-        child: TabBarTypeActionStory(
-          tabLabels: ['Đọc truyện',],
-          pages: [KeepAlivePage(child: _buildContainerStoryRead())],
-        ),
+          child: Column(
+        children: [
+          TextFormField(
+            textInputAction: TextInputAction.search,
+            readOnly: true,
+            onTap: controller.onTapSearch,
+            decoration: InputDecoration(
+              fillColor: AssetColors.colorGreyE7E7E7,
+              hintText: 'Nhập tên truyện',
+              contentPadding: EdgeInsets.symmetric(vertical: 1),
+              prefixIcon: const Icon(
+                Icons.search,
+                size: 24,
+                color: AssetColors.colorGrey262626,
+              ),
+            ),
+          ).paddingSymmetric(horizontal: 20),
+          20.verticalSpace,
+          Expanded(child: _buildContainerStoryRead().paddingSymmetric(horizontal: 10)),
+        ],
       ),
+          ),
     );
   }
 
@@ -37,6 +54,8 @@ class HomePage extends GetView<HomeController> {
           SingleChildScrollView(
             child: Column(
               children: [
+                _buildTagStory(),
+                const Divider(height: 50),
                 GroupStoryByTypeWidget(
                   title: 'Truyện hot',
                   onTapSeeMore: controller.onTapSeeMoreHot,
@@ -49,9 +68,9 @@ class HomePage extends GetView<HomeController> {
                     },
                   ),
                 ),
-                20.verticalSpace,
+                const Divider(height: 50),
                 GroupStoryByTypeWidget(
-                  title: 'Truyện mới cập nhật',
+                  title: 'Mới cập nhật',
                   onTapSeeMore: controller.onTapSeeMoreUpdate,
                   child: ContainerStoryHome(
                     models: controller.listStoryUpdated.value,
@@ -62,9 +81,9 @@ class HomePage extends GetView<HomeController> {
                     },
                   ),
                 ),
-                20.verticalSpace,
+                const Divider(height: 50),
                 GroupStoryByTypeWidget(
-                  title: 'Truyện đã hoàn thành',
+                  title: 'Đã hoàn thành',
                   onTapSeeMore: controller.onTapSeeMoreFull,
                   child: ContainerStoryHome(
                     models: controller.listStoryFulls.value,
@@ -76,8 +95,7 @@ class HomePage extends GetView<HomeController> {
                   ),
                 ),
                 20.verticalSpace,
-                _buildTagStory(),
-                20.verticalSpace,
+
               ],
             ).paddingSymmetric(horizontal: 12),
           ),
@@ -92,20 +110,23 @@ class HomePage extends GetView<HomeController> {
     return GroupStoryByTypeWidget(
       title: 'Thẻ truyện',
       onTapSeeMore: controller.onTapSeeMoreTagStory,
-      child: Wrap(
-        runSpacing: 10,
-        spacing: 10,
-        children: _list.asMap().keys.map((index) {
-          final _title = _list[index].name ?? '';
-          final _index = index % AssetColors.colorRandom.length;
-          final _color = AssetColors.colorRandom[_index];
-          return ItemTagStory(
-            title: _title,
-            color: _color,
-            onTap: () => controller.onTapTagStory(_list[index]),
-          );
-        }).toList(),
-      ).fullWidth,
+      child: GridView.count(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          crossAxisCount: 2,
+          childAspectRatio: 3.5,
+          padding: const EdgeInsets.only(bottom: 20),
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 20,
+          children: _list.asMap().keys.map((index) {
+            final _title = _list[index].name ?? '';
+            final _index = index % AssetColors.colorRandom.length;
+            final _color = AssetColors.colorRandom[_index];
+            return ItemTagStory(
+                title: _title,
+                color: _color,
+                onTap: () => controller.onTapTagStory(_list[index]));
+          }).toList())
     );
   }
 }

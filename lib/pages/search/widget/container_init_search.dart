@@ -14,8 +14,7 @@ class ContainerInitSearch extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          _buildStoryHot(),
-          const Divider(height: 50),
+          //  _buildStoryHot(),
           _buildPopularStoryType(),
           20.verticalSpace,
         ],
@@ -52,20 +51,24 @@ class ContainerInitSearch extends StatelessWidget {
     final _list = _controller.appController.popularStoryTags;
     return TitleAndWidgetSearch(
       title: 'Thể loại truyện phổ biến',
-      child: Wrap(
-        runSpacing: 10,
-        spacing: 10,
-        children: _list.asMap().keys.map((index) {
-          final _title = _list[index].name ?? '';
-          final _index = index % AssetColors.colorRandom.length;
-          final _color = AssetColors.colorRandom[_index];
-          return ItemTagStory(
-            title: _title,
-            color: _color,
-            onTap: () => _controller.onTapTypeStory(_list[index]),
-          );
-        }).toList(),
-      ).fullWidth,
+      child: GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              childAspectRatio: 3.5,
+              padding: const EdgeInsets.only(bottom: 20),
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 20,
+              children: _list.asMap().keys.map((index) {
+                final _title = _list[index].name ?? '';
+                final _index = index % AssetColors.colorRandom.length;
+                final _color = AssetColors.colorRandom[_index];
+                return ItemTagStory(
+                    title: _title,
+                    color: _color,
+                    onTap: () => _controller.onTapTypeStory(_list[index]));
+              }).toList())
+          .fullWidth,
     );
   }
 }

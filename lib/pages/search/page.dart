@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:truyen_chu/theme/theme.dart';
 import '../../common/common.dart';
 import '../../enum.dart';
 
@@ -10,17 +11,19 @@ class SearchPage extends GetView<SearchController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AssetColors.colorBlueF2F4FF,
         appBar: AppBar(
           elevation: 0,
           titleSpacing: 0,
           title: TextFieldSearch(),
           actions: [
-            TextButton(
-                onPressed: controller.onTapSearch,
-                child: Text(
-                  'Tìm kiếm',
-                  style: TextStyle(fontSize: 15),
-                )),
+            InkWell(
+              onTap:  controller.onTapSearch,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Icon(Icons.search, color: Colors.white),
+              ),
+            ),
           ],
         ),
         body: Column(
@@ -39,7 +42,9 @@ class SearchPage extends GetView<SearchController> {
     final _status = controller.statusSearch.value;
     final _widget = _status == StatusSearch.INIT_SEARCH
         ? ContainerInitSearch().paddingSymmetric(horizontal: 20)
-        : (_status == StatusSearch.HAVE_VALUE ? ContainerSearchResult() : ContainerSearchNotResult().paddingSymmetric(horizontal: 20));
+        : (_status == StatusSearch.HAVE_VALUE
+            ? ContainerSearchResult()
+            : ContainerSearchNotResult().paddingSymmetric(horizontal: 20));
     return _widget;
   }
 }

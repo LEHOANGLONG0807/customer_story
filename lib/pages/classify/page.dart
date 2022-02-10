@@ -14,7 +14,7 @@ class ClassifyPage extends GetView<ClassifyController> {
     return Scaffold(
       backgroundColor: AssetColors.colorBlueF2F4FF,
       appBar: AppBar(
-        title:  Text('Phân loại',style: _textTheme.headline6!.textBlack,),
+        title:  Text('Phân loại',style: _textTheme.headline6!.textWhite,),
       ),
       body:  TabViewStoryRead(),
       // TabBarTypeClassify(tabLabels: [

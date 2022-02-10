@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:truyen_chu/theme/theme.dart';
 import '../../common/common.dart';
 
 import 'controller.dart';
@@ -10,10 +11,10 @@ class ListStoryPage extends GetView<ListStoryController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AssetColors.colorBlueF2F4FF,
       appBar: AppBar(
         title: Obx(
-          () => Text(controller.title.value,style: _textTheme.headline6!.textBlack,),
+          () => Text(controller.title.value,style: _textTheme.headline6!.textWhite,),
         ),
       ),
       body: Obx(
@@ -25,7 +26,7 @@ class ListStoryPage extends GetView<ListStoryController> {
             }
             return ItemStoryInList(model: controller.listStory[index], onTap: () => controller.onTapStory(controller.listStory[index].id));
           },
-          separatorBuilder: (_, index) => const Divider(height: 30),
+          separatorBuilder: (_, index) => 20.verticalSpace,
           itemCount: controller.listStory.length,
         ),
       ),

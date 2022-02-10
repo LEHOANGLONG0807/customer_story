@@ -43,27 +43,24 @@ class _CustomTabBarNotTabViewState extends State<CustomTabBarNotTabView> with Si
   final _theme = Get.theme;
 
   Widget build(BuildContext context) {
-    return Obx(() {
-      return TabBar(
-        controller: _tabController,
-        unselectedLabelStyle: _theme.textTheme.subtitle2!.regular,
-        unselectedLabelColor: _theme.hintColor,
-        labelStyle: _theme.textTheme.subtitle2!.medium,
-        indicatorWeight: 0,
-        labelPadding: const EdgeInsets.symmetric(horizontal: 5),
-        labelColor: Colors.white,
-        tabs: _controller.tags.asMap().keys.map((index) {
-          final _title = _controller.tags[index].name ?? '';
-          return Tab(child: _buildItemTabBar(title: _title, isFocus: _index.value == index));
-        }).toList(),
-        indicator: const BoxDecoration(),
-        isScrollable: true,
-        onTap: (val) {
-          widget.onTabChanged?.call(_controller.tags[val].id);
-          _index.value = val;
-        },
-      );
-    });
+    return TabBar(
+      controller: _tabController,
+      unselectedLabelStyle: _theme.textTheme.subtitle2!.regular,
+      unselectedLabelColor: _theme.hintColor,
+      labelStyle: _theme.textTheme.subtitle2!.semiBold,
+      labelPadding: const EdgeInsets.symmetric(horizontal: 5),
+      labelColor: _theme.primaryColor,
+      tabs: _controller.tags.asMap().keys.map((index) {
+        final _title = _controller.tags[index].name ?? '';
+        return Tab(text: _title,);
+      }).toList(),
+      indicatorColor: _theme.primaryColor,
+      isScrollable: true,
+      onTap: (val) {
+        widget.onTabChanged?.call(_controller.tags[val].id);
+        _index.value = val;
+      },
+    );
   }
 
   Widget _buildItemTabBar({required String title, bool isFocus = false}) {

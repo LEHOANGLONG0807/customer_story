@@ -16,7 +16,7 @@ class ListCategoryStoryRead extends StatelessWidget {
           child: Column(
             children: [
               _buildMainCategory(),
-              _buildSubCategory(),
+             // _buildSubCategory(),
             ],
           ),
         );
@@ -25,7 +25,7 @@ class ListCategoryStoryRead extends StatelessWidget {
   }
 
   Widget _buildMainCategory() {
-    final _models = _controller.mainCategory;
+    final _models = _controller.mainCategory+_controller.subCategory;
     return GridView.count(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

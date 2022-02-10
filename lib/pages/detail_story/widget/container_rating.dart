@@ -19,14 +19,14 @@ class ContainerRating extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Đánh giá nhanh',
+                  'Đánh giá',
                   style: _theme.textTheme.subtitle1,
                 ),
                 TextButton(
                   style: TextButton.styleFrom(onSurface: Colors.grey),
                   onPressed: _controller.countStar.value > 0 ? _controller.onTapSendRatting : null,
                   child: Text(
-                    'Gửi >>',
+                    'Gửi',
                   ),
                 ),
               ],

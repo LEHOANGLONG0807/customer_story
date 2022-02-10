@@ -4,7 +4,7 @@ class AssetColors {
   static Color shimmerBaseColor = Colors.grey.withOpacity(0.8);
   static Color shimmerHighlightColor = Colors.grey.withOpacity(0.5);
   static const Color textBlack = Color(0xff181A20);
-  static const Color primary = Color(0xffFFAC40);
+  static const Color primary = Color(0xff4285F4);
   static const Color colorGreyBFBFBF = Color(0xffBFBFBF);
   static const Color colorGrey333333 = Color(0xff333333);
   static const Color colorGrey262626 = Color(0xff262626);

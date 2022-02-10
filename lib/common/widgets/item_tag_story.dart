@@ -13,18 +13,22 @@ class ItemTagStory extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Container(
-        height: 45,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(100),
-          border: Border.all(color: color, width: 1),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text(title, style: _theme.textTheme.subtitle1!.medium, maxLines: 1, overflow: TextOverflow.ellipsis)],
-        ),
+      child: Stack(
+        alignment: Alignment.bottomRight,
+        children: [
+          Container(
+            height: 45,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: Text(title, style: _theme.textTheme.subtitle1!.medium, maxLines: 1, overflow: TextOverflow.ellipsis),
+            )
+          ),
+          Container(width: 8,height: 8,color: color),
+        ],
       ),
     );
   }

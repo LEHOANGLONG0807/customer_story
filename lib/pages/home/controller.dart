@@ -86,14 +86,12 @@ class HomeController extends GetxController {
         final _response = await repository.fetchStoryHotByTagId(tagId: tagIdHotSelected);
         _storyHots.addAll({'$tagIdHotSelected': _response});
       }
-      if (isJump) {
-        pageControllerHot.jumpToPage(0);
-      }
 
       listStoryHots.value = _storyHots['$tagIdHotSelected'];
       listStoryHots.refresh();
       _addTheFistStoryBoard();
     } catch (e) {
+      print(e);
       EasyLoading.showError('Đã xảy ra lỗi!');
     }
   }
@@ -104,7 +102,6 @@ class HomeController extends GetxController {
         final _response = await repository.fetchStoryUpdatedByTagId(tagId: tagIdUpdateSelected);
         _storyUpdated.addAll({'$tagIdUpdateSelected': _response});
       }
-      if (isJump) pageControllerUpdated.jumpToPage(0);
       listStoryUpdated.value = _storyUpdated['$tagIdUpdateSelected'];
       listStoryUpdated.refresh();
     } catch (e) {
@@ -118,7 +115,7 @@ class HomeController extends GetxController {
         final _response = await repository.fetchStoryFullByTagId(tagId: tagIdFullSelected);
         _storyFulls.addAll({'$tagIdFullSelected': _response});
       }
-      if (isJump) pageControllerFull.jumpToPage(0);
+
       listStoryFulls.value = _storyFulls['$tagIdFullSelected'];
       listStoryFulls.refresh();
     } catch (e) {

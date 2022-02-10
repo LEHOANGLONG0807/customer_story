@@ -69,39 +69,6 @@ class DetailStoryPage extends GetView<DetailStoryController> {
       padding: UIHelper.horizontalEdgeInsets20,
       child: Row(
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  _model.title ?? '',
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: _theme.textTheme.subtitle1!.textWhite.medium,
-                ),
-                const Spacer(),
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: controller.onTapAuthorTitle,
-                      child: Text(
-                        '${_model.authorName ?? ''}',
-                        style: _theme.textTheme.subtitle2!.textColor(AssetColors.colorGreyB4B2B2).regular,
-                      ),
-                    ).paddingOnly(bottom: 5),
-                    5.horizontalSpace,
-                    const Icon(Icons.arrow_forward_ios_outlined, color: Colors.white, size: 12)
-                  ],
-                ),
-                10.verticalSpace,
-                Text(
-                  '${(_model.isFull ?? false) ? 'Hoàn thành' : 'Đang ra'} - Chương ${_model.chap ?? 0}',
-                  style: _theme.textTheme.subtitle2!.textColor(AssetColors.colorGreyB4B2B2).regular,
-                ),
-              ],
-            ).wrapHeight(130),
-          ),
-          20.horizontalSpace,
           Container(
             width: 100,
             height: 130,
@@ -112,6 +79,39 @@ class DetailStoryPage extends GetView<DetailStoryController> {
             child: CachedImageNetworkWidget(
               url: _model.thumbnail ?? '',
             ),
+          ),
+          20.horizontalSpace,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _model.title ?? '',
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: _theme.textTheme.headline6!.textWhite.semiBold,
+                ),
+                const Spacer(),
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: controller.onTapAuthorTitle,
+                      child: Text(
+                        '${_model.authorName ?? ''}',
+                        style: _theme.textTheme.subtitle2!.regular.textWhite,
+                      ),
+                    ).paddingOnly(bottom: 5),
+                    5.horizontalSpace,
+                    const Icon(Icons.arrow_forward_ios_outlined, color: Colors.white, size: 12)
+                  ],
+                ),
+                10.verticalSpace,
+                Text(
+                  '${(_model.isFull ?? false) ? 'Hoàn thành' : 'Đang ra'} - Chương ${_model.chap ?? 0}',
+                  style: _theme.textTheme.subtitle2!.textWhite.regular,
+                ),
+              ],
+            ).wrapHeight(130),
           ),
         ],
       ),
@@ -127,10 +127,6 @@ class DetailStoryPage extends GetView<DetailStoryController> {
           clipBehavior: Clip.antiAliasWithSaveLayer,
           decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(20),
-              topLeft: Radius.circular(20),
-            ),
           ),
           child: NotificationListener<ScrollNotification>(
             onNotification: (scrollInfo) {
@@ -174,9 +170,9 @@ class DetailStoryPage extends GetView<DetailStoryController> {
             child: AdWidget(ad: controller.appController.bannerAdMedium3),
           ),
         20.verticalSpace,
-        _buildIntroduce(),
-        const Divider(height: 40),
         ContainerRating(),
+        const Divider(height: 40),
+        _buildIntroduce(),
         30.verticalSpace,
       ],
     ).paddingSymmetric(horizontal: 20);
@@ -222,7 +218,7 @@ class DetailStoryPage extends GetView<DetailStoryController> {
             5.horizontalSpace,
             Icon(
               Icons.star,
-              color: _theme.primaryColor,
+              color: Colors.yellow,
             ),
           ],
         ),

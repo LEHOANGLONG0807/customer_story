@@ -54,11 +54,15 @@ class ItemStoryHistory extends StatelessWidget {
         height: 100,
         margin: UIHelper.horizontalEdgeInsets20,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildImage(),
             15.horizontalSpace,
             _buildContent(),
             10.horizontalSpace,
+            Obx(
+                  () => Icon(Icons.add).elevatedButton(onPressed: _isAdBoard.value ? null : _onAdd).wrapHeight(30),
+            ),
           ],
         ),
       ),
@@ -86,7 +90,7 @@ class ItemStoryHistory extends StatelessWidget {
         children: [
           Text(
             model.title ?? '',
-            maxLines: 2,
+            maxLines: 4,
             overflow: TextOverflow.ellipsis,
             style: _theme.textTheme.subtitle1!.medium.heightLine(16),
           ),
@@ -94,10 +98,7 @@ class ItemStoryHistory extends StatelessWidget {
             'Đang xem chương ${model.chapterId} - Trang ${model.pageIndex}',
             style: _theme.textTheme.caption!.textBFBFBF,
           ),
-          const Spacer(),
-          Obx(
-            () => Text('Thêm vào tủ truyện').elevatedButton(onPressed: _isAdBoard.value ? null : _onAdd).wrapHeight(30),
-          ),
+
         ],
       ),
     );

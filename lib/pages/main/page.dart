@@ -13,20 +13,20 @@ class MainPage extends GetResponsiveView<MainController> {
           items: controller.bottomNavBarItems
               .map(
                 (item) => BottomNavigationBarItem(
-                  icon: Image.asset(item.icon.assetPathPNG, color: const Color(0xffCBCBCB), width: 24),
-                  activeIcon: Image.asset(item.icon.assetPathPNG, color: _theme.primaryColor, width: 24),
+                  icon: Image.asset(item.icon.assetPathPNG, color: Colors.white, width: 24),
+                  activeIcon: Image.asset(item.icon.assetPathPNG, color: Colors.white, width: 24),
                   label: item.label,
                 ),
               )
               .toList(),
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: true,
-          backgroundColor: Colors.white,
+          backgroundColor: _theme.primaryColor,
           showUnselectedLabels: true,
           currentIndex: controller.currentTabIndex.value,
           onTap: controller.onItemTapped,
-          selectedItemColor: _theme.primaryColor,
-          unselectedItemColor: Colors.grey,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white,
           selectedLabelStyle: _theme.textTheme.caption!.bold,
           unselectedLabelStyle: _theme.textTheme.caption!.regular,
         ),

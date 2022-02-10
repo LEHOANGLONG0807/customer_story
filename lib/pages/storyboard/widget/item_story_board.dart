@@ -15,6 +15,8 @@ class ItemStoryBoard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
         child: Column(
           children: [
             _buildImage(),

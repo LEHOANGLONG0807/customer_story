@@ -19,13 +19,13 @@ class GroupStoryByTypeWidget extends StatelessWidget {
           children: [
             Text(
               title,
-              style: _theme.textTheme.subtitle1,
+              style: _theme.textTheme.headline6!.textPrimary,
             ),
             const Spacer(),
             InkWell(
               onTap: onTapSeeMore,
               child: Text(
-                'Xem thêm >',
+                'Xem thêm',
                 style: _theme.textTheme.bodyText2!.medium.textPrimary,
               ),
             )
@@ -34,6 +34,6 @@ class GroupStoryByTypeWidget extends StatelessWidget {
         15.verticalSpace,
         child,
       ],
-    ).wrapCard;
+    );
   }
 }

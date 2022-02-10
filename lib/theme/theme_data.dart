@@ -6,15 +6,15 @@ import 'theme.dart';
 class StoryWordThemeData {
   static final InputBorder _inputBorder = OutlineInputBorder(
     borderSide: BorderSide(color: Colors.transparent),
-    borderRadius: BorderRadius.circular(100),
+    borderRadius: BorderRadius.circular(10),
   );
   static final InputBorder _focusInputBorder = OutlineInputBorder(
     borderSide: BorderSide(color: Colors.transparent),
-    borderRadius: BorderRadius.circular(100),
+    borderRadius: BorderRadius.circular(10),
   );
   static final themeData = ThemeData(
     colorScheme: _colorScheme,
-    primaryColor: const Color(0xFFFFAC40),
+    primaryColor: const Color(0xFF4285F4),
     // primarySwatch: MaterialColor(0xFFFFAC40, const {
     //   50: const Color(0xFFFFF4E3),
     //   100: const Color(0xFFFFE2B8),
@@ -31,10 +31,12 @@ class StoryWordThemeData {
     accentColor: _colorScheme.primary,
     appBarTheme: AppBarTheme(
       centerTitle: true,
-      iconTheme: IconThemeData(color: _colorScheme.onBackground),
+      iconTheme: IconThemeData(color: Colors.white),
       textTheme: _textTheme,
       elevation: 0,
-      color: Colors.white,
+      actionsIconTheme: IconThemeData(color: Colors.white),
+      titleTextStyle: _textTheme.headline6?.copyWith(color: Colors.white),
+      color: AssetColors.primary,
     ),
     canvasColor: _colorScheme.background,
     toggleableActiveColor: _colorScheme.primary,
@@ -104,7 +106,7 @@ class StoryWordThemeData {
         onPrimary: Colors.white,
         onSurface: Colors.grey,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100),
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
     ),
@@ -113,7 +115,7 @@ class StoryWordThemeData {
         minimumSize: Size(76.0, 56.0),
         side: BorderSide(width: 1.5, color: _colorScheme.primary),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100),
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
     ),
@@ -125,9 +127,9 @@ class StoryWordThemeData {
   static const _bold = FontWeight.w700;
 
   static const _colorScheme = ColorScheme(
-    primary: const Color(0xFFFFAC40),
-    primaryVariant: const Color(0xFFE25D20),
-    secondary: const Color(0xFFFFCF8B),
+    primary: const Color(0xFF4285F4),
+    primaryVariant: const Color(0xFF4285F4),
+    secondary: const Color(0xFF4285F4),
     secondaryVariant: Color(0xFFC77D02),
     background: Colors.white,
     onBackground: Colors.black,

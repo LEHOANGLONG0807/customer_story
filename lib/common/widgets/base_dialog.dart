@@ -80,9 +80,11 @@ class DialogQuestion extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           width: double.infinity,
-          height: 65,
+          margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+          height: 50,
           decoration: BoxDecoration(
             color: isPrimary ? _theme.primaryColor : Colors.transparent,
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: Colors.black.withOpacity(0.09),
             ),
