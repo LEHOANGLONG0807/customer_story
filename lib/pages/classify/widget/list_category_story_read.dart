@@ -10,25 +10,12 @@ class ListCategoryStoryRead extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () {
-        return SingleChildScrollView(
-          child: Column(
-            children: [
-              _buildMainCategory(),
-             // _buildSubCategory(),
-            ],
-          ),
-        );
-      },
-    );
+    return  _buildMainCategory();
   }
 
   Widget _buildMainCategory() {
-    final _models = _controller.mainCategory+_controller.subCategory;
+    final _models = (_controller.mainCategory+_controller.subCategory).toList();
     return GridView.count(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
       crossAxisCount: 2,
       childAspectRatio: 3.5,
       padding: const EdgeInsets.only(bottom: 12),

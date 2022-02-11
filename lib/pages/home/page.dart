@@ -23,6 +23,7 @@ class HomePage extends GetView<HomeController> {
       body: SafeArea(
           child: Column(
         children: [
+          20.verticalSpace,
           TextFormField(
             textInputAction: TextInputAction.search,
             readOnly: true,
@@ -37,7 +38,7 @@ class HomePage extends GetView<HomeController> {
                 color: AssetColors.colorGrey262626,
               ),
             ),
-          ).paddingSymmetric(horizontal: 20),
+          ).paddingSymmetric(horizontal: 20).wrapHeight(40),
           20.verticalSpace,
           Expanded(child: _buildContainerStoryRead().paddingSymmetric(horizontal: 10)),
         ],

@@ -18,6 +18,12 @@ class ClassifyController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
     mainCategory.value = appController.mainCategory;
     subCategory.value = appController.subCategory;
   }
@@ -25,13 +31,15 @@ class ClassifyController extends GetxController {
   void onTapItemCategory(TagModel model) async {
     await analytics.setUserProperty(name: TAG_STORY, value: '${model.id}');
     await analytics.logEvent(name: EVENT_LIST_BY_TAG, parameters: {'id': model.id});
-    Get.toNamed(Routes.LIST_STORY, arguments: {'title': model.name ?? '', 'url': '/stories/?tag_id=${model.id}'});
+    Get.toNamed(Routes.LIST_STORY,
+        arguments: {'title': model.name ?? '', 'url': '/stories/?tag_id=${model.id}'});
   }
 
   void onTapItemTag(TagModel model) async {
     await analytics.setUserProperty(name: SUGGEST_TAG_STORY, value: '${model.id}');
     await analytics.logEvent(name: EVENT_LIST_BY_SUGGEST_TAG, parameters: {'id': model.id});
-    Get.toNamed(Routes.LIST_STORY, arguments: {'title': model.name ?? '', 'url': '/stories/suggest/?tag_id=${model.id}'});
+    Get.toNamed(Routes.LIST_STORY,
+        arguments: {'title': model.name ?? '', 'url': '/stories/suggest/?tag_id=${model.id}'});
   }
 
   void feedBackStoryListen() {

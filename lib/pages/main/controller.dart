@@ -17,7 +17,7 @@ class MainController extends GetxController {
       BottomNavBarModel(icon: 'ic_home', label: 'Trang chủ', page: HomePage()),
       BottomNavBarModel(icon: 'ic_classify', label: 'Phân Loại', page: ClassifyPage()),
       BottomNavBarModel(icon: 'ic_story_board', label: 'Tủ truyện', page: StoryBoardPage()),
-      BottomNavBarModel(icon: 'ic_story_board', label: 'Lịch Sử', page: HistoryReadingPage()),
+      BottomNavBarModel(icon: 'ic_history', label: 'Lịch Sử', page: HistoryReadingPage()),
     ];
   }
 

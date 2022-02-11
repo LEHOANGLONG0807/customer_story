@@ -149,7 +149,7 @@ class ReadStoryPage extends GetView<ReadStoryController> {
                     child: Row(
                       children: [
                         Text(
-                          'Thêm vào tủ truyện',
+                          'Lưu truyện',
                           style: _theme.textTheme.subtitle1!.text434343,
                         ),
                         5.horizontalSpace,

@@ -18,6 +18,7 @@ class TextFieldSearch extends StatelessWidget {
         TextFormField(
           controller: _controller.textController,
           textInputAction: TextInputAction.search,
+          autofocus: true,
           decoration: InputDecoration(
             fillColor: AssetColors.colorGreyE7E7E7,
             hintText: 'Nhập tên truyện',

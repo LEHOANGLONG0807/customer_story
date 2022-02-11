@@ -10,15 +10,27 @@ class MainPage extends GetResponsiveView<MainController> {
     return Obx(
       () => Scaffold(
         bottomNavigationBar: BottomNavigationBar(
-          items: controller.bottomNavBarItems
-              .map(
-                (item) => BottomNavigationBarItem(
-                  icon: Image.asset(item.icon.assetPathPNG, color: Colors.white, width: 24),
-                  activeIcon: Image.asset(item.icon.assetPathPNG, color: Colors.white, width: 24),
-                  label: item.label,
-                ),
-              )
-              .toList(),
+          items: controller.bottomNavBarItems.asMap().keys.map((index) {
+            final item = controller.bottomNavBarItems[index];
+            return BottomNavigationBarItem(
+                icon: Image.asset(item.icon.assetPathPNG, color: Colors.white, width: 20),
+                activeIcon: Image.asset(item.icon.assetPathPNG, color: Colors.white, width: 24),
+                title: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(item.label),
+                    2.verticalSpace,
+                    AnimatedContainer(
+                      duration: 250.milliseconds,
+                      width: 50,
+                      height: 3,
+                      color: controller.currentTabIndex.value == index
+                          ? Colors.white
+                          : Colors.transparent,
+                    ),
+                  ],
+                ));
+          }).toList(),
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: true,
           backgroundColor: _theme.primaryColor,

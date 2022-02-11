@@ -31,7 +31,7 @@ class ContainerStoryHome extends StatelessWidget {
             padding: EdgeInsets.zero,
             mainAxisSpacing: 10,
             crossAxisSpacing: 6,
-            children: (models.length>8?models.sublist(0,8):models).map((item) {
+            children: (models.length>12?models.sublist(0,12):models).map((item) {
               return ItemStoryHome(
                 model: item,
                onTap: () => _controller.onTapStory(item.id),

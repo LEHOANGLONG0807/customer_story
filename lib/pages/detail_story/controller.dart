@@ -61,7 +61,7 @@ class DetailStoryController extends GetxController {
 
   int _totalPageChapter = 0;
 
-  final backgroundColor = AssetColors.primary.obs;
+  final backgroundColor = Color(0xffbdd4e7).obs;
 
   late RewardedAd _rewardedAd;
 
@@ -94,8 +94,6 @@ class DetailStoryController extends GetxController {
       }
       EasyLoading.dismiss();
       _checkStoryBoardLocal();
-      final _random = Random().nextInt(8);
-      backgroundColor.value = AssetColors.primary;
     } catch (e) {
       EasyLoading.dismiss();
       EasyLoading.showError('Đã xảy ra lỗi!');
@@ -158,6 +156,7 @@ class DetailStoryController extends GetxController {
       EasyLoading.show();
       final _boardLocalModel = storyModel.value.toStoryBroadLocalModel;
       final _response = await dbService.addStoryBoard(model: _boardLocalModel);
+      EasyLoading.dismiss();
       if (_response) {
         showSnackBarSuccess(message: 'Thêm vào tủ truyện thành công!');
         showButtonAddBoard.value = false;

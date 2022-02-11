@@ -51,7 +51,7 @@ class DetailStoryPage extends GetView<DetailStoryController> {
                           width: 20,
                         )
                       : Text(
-                          '+ Thêm vào tủ truyện',
+                          '+ Lưu truyện',
                           style: TextStyle(color: Colors.white),
                         ),
                 )
