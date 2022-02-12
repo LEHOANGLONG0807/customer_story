@@ -105,7 +105,7 @@ class DetailStoryPage extends GetView<DetailStoryController> {
                     const Icon(Icons.arrow_forward_ios_outlined, color: Colors.white, size: 12)
                   ],
                 ),
-                10.verticalSpace,
+                5.verticalSpace,
                 Text(
                   '${(_model.isFull ?? false) ? 'Hoàn thành' : 'Đang ra'} - Chương ${_model.chap ?? 0}',
                   style: _theme.textTheme.subtitle2!.textWhite.regular,

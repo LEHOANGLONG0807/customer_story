@@ -24,14 +24,14 @@ class ContainerStoryHome extends StatelessWidget {
         ),
         20.verticalSpace,
         if (models.isEmpty) UIHelper.emptyBox else GridView.count(
-            crossAxisCount: 4,
-            childAspectRatio: 75 / 150,
+            crossAxisCount: 3,
+            childAspectRatio: 90 / 150,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             padding: EdgeInsets.zero,
             mainAxisSpacing: 10,
             crossAxisSpacing: 6,
-            children: (models.length>12?models.sublist(0,12):models).map((item) {
+            children: (models.length>18?models.sublist(0,18):models).map((item) {
               return ItemStoryHome(
                 model: item,
                onTap: () => _controller.onTapStory(item.id),

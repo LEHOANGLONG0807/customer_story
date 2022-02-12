@@ -61,7 +61,7 @@ class DetailStoryController extends GetxController {
 
   int _totalPageChapter = 0;
 
-  final backgroundColor = Color(0xffbdd4e7).obs;
+  final backgroundColor = Color(0xff3A9BDC).obs;
 
   late RewardedAd _rewardedAd;
 
