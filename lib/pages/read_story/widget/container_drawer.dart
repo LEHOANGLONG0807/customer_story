@@ -6,16 +6,19 @@ import '../../../common/common.dart';
 import '../../pages.dart';
 
 class ContainerDrawer extends StatelessWidget {
-  final _controller = Get.find<ReadStoryController>();
+  final ReadStoryController controller;
+
+  ContainerDrawer(this.controller);
+
   ScrollController? _scrollController;
   final _theme = Get.theme;
   @override
   Widget build(BuildContext context) {
-    if (_controller.reverseChapterList.value) {
-      _scrollController = ScrollController(initialScrollOffset: _controller.chapterContentModel.value.id * 60 - Get.height / 2);
+    if (controller.reverseChapterList.value) {
+      _scrollController = ScrollController(initialScrollOffset: controller.chapterContentModel.value.id * 60 - Get.height / 2);
     } else {
       _scrollController =
-          ScrollController(initialScrollOffset: (_controller.allChapters.length - _controller.chapterContentModel.value.id) * 60 - Get.height / 2);
+          ScrollController(initialScrollOffset: (controller.allChapters.length - controller.chapterContentModel.value.id) * 60 - Get.height / 2);
     }
     return Container(
       width: double.infinity,
@@ -38,15 +41,15 @@ class ContainerDrawer extends StatelessWidget {
         controller: _scrollController,
         padding: const EdgeInsets.only(left: 10),
         itemBuilder: (_, index) {
-          final _chapterTitle = _controller.allChapters[index];
-          final _idChapterSelected = _controller.chapterContentModel.value.id;
+          final _chapterTitle = controller.allChapters[index];
+          final _idChapterSelected = controller.chapterContentModel.value.id;
           return _buildItemChapter(
             title: _chapterTitle.chapTitle ?? '',
             isSelected: _chapterTitle.id == _idChapterSelected,
-            onTap: () => _controller.onTapChooseChapter(_chapterTitle.id),
+            onTap: () => controller.onTapChooseChapter(_chapterTitle.id),
           );
         },
-        itemCount: _controller.allChapters.length,
+        itemCount: controller.allChapters.length,
         separatorBuilder: (_, int index) => const Divider(height: 0),
       ).scrollBar(color: Colors.black, controller: _scrollController),
     );
@@ -89,7 +92,7 @@ class ContainerDrawer extends StatelessWidget {
 
   Widget _buildContainerStory() {
     return InkWell(
-      onTap: _controller.onTapDetailStory,
+      onTap: controller.onTapDetailStory,
       child: Row(
         children: [
           _buildImage(),
@@ -107,11 +110,11 @@ class ContainerDrawer extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          '${_controller.storyModel?.chap ?? 0} chương - ${(_controller.storyModel?.isFull ?? false) ? 'Hoàn thành' : 'Đang ra'}',
+          '${controller.storyModel?.chap ?? 0} chương - ${(controller.storyModel?.isFull ?? false) ? 'Hoàn thành' : 'Đang ra'}',
           style: _theme.textTheme.subtitle1!.regular.textWhite,
         ),
         InkWell(
-          onTap: _controller.onTapSortChapter,
+          onTap: controller.onTapSortChapter,
           child: Text(
             'Đảo thứ tự',
             style: _theme.textTheme.subtitle1!.textWhite,
@@ -130,7 +133,7 @@ class ContainerDrawer extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       child: CachedImageNetworkWidget(
-        url: _controller.storyModel?.thumbnail ?? '',
+        url: controller.storyModel?.thumbnail ?? '',
       ),
     );
   }
@@ -142,14 +145,14 @@ class ContainerDrawer extends StatelessWidget {
         children: [
           Row(),
           Text(
-            _controller.storyModel?.title ?? '',
+            controller.storyModel?.title ?? '',
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: _theme.textTheme.subtitle1!.textWhite.size(18).semiBold.heightLine(20),
           ),
           10.horizontalSpace,
           Text(
-            _controller.storyModel?.authorName ?? '',
+            controller.storyModel?.authorName ?? '',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: _theme.textTheme.subtitle1!.regular.textWhite,

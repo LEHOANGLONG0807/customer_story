@@ -42,7 +42,7 @@ class PageViewStoryInGroup extends StatelessWidget {
             }).toList(),
           ),
         ),
-        _buildRowStep(),
+       // _buildRowStep(),
       ],
     );
   }
@@ -64,14 +64,14 @@ class PageViewStoryInGroup extends StatelessWidget {
         }).toList());
   }
 
-  Widget _buildRowStep() {
-    return Obx(
-      () => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: _numberPage.asMap().keys.map((e) => _buildItemStep(isFocus: e < _currentIndexPage.value + 0.4 && e > _currentIndexPage.value - 0.6)).toList(),
-      ),
-    );
-  }
+  // Widget _buildRowStep() {
+  //   return Obx(
+  //     () => Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: _numberPage.asMap().keys.map((e) => _buildItemStep(isFocus: e < _currentIndexPage.value + 0.4 && e > _currentIndexPage.value - 0.6)).toList(),
+  //     ),
+  //   );
+  // }
 
   Widget _buildItemStep({bool isFocus = false}) {
     return Container(

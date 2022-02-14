@@ -9,8 +9,10 @@ import 'widget/widget.dart';
 
 import 'controller.dart';
 
-class ReadStoryPage extends GetView<ReadStoryController> {
+class ReadStoryPage extends StatelessWidget {
   final _theme = Get.theme;
+  final controller = Get.put(ReadStoryController(),
+      tag: '${Get.arguments?['storyId'] ?? ''}-${Get.arguments?['chapterId'] ?? ''}');
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -58,9 +60,9 @@ class ReadStoryPage extends GetView<ReadStoryController> {
           );
         }),
         drawer: Drawer(
-          child: ContainerDrawer(),
+          child: ContainerDrawer(controller),
         ).wrapWidth(Get.width * 0.9),
-        bottomNavigationBar: ContainerBottomReadAction(),
+        bottomNavigationBar: ContainerBottomReadAction(controller),
       ),
     );
   }

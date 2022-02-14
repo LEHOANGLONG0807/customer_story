@@ -60,22 +60,21 @@ abstract class AppPages {
       name: Routes.SEARCH,
       page: () => SearchPage(),
       bindings: [
-        BindingsBuilder.put(() => SearchController(searchRepository: Get.find(), homeRepository: Get.find())),
+        BindingsBuilder.put(
+            () => SearchController(searchRepository: Get.find(), homeRepository: Get.find())),
       ],
     ),
     GetPage(
       name: Routes.DETAIL_STORY,
       page: () => DetailStoryPage(),
       bindings: [
-        BindingsBuilder.put(() => DetailStoryController(storyRepository: Get.find(), chapterRepository: Get.find(), dbService: Get.find())),
+        BindingsBuilder.put(() => DetailStoryController(
+            storyRepository: Get.find(), chapterRepository: Get.find(), dbService: Get.find())),
       ],
     ),
     GetPage(
       name: Routes.READING_STORY,
       page: () => ReadStoryPage(),
-      bindings: [
-        BindingsBuilder.put(() => ReadStoryController(chapterRepository: Get.find(), storyRepository: Get.find(), dbService: Get.find())),
-      ],
     ),
   ];
 }

@@ -6,7 +6,10 @@ import '../../../common/common.dart';
 import '../../pages.dart';
 
 class ContainerBottomReadAction extends StatelessWidget {
-  final _controller = Get.find<ReadStoryController>();
+  final ReadStoryController controller;
+
+  ContainerBottomReadAction(this.controller);
+
   final _theme = Get.theme;
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class ContainerBottomReadAction extends StatelessWidget {
       () => AnimatedContainer(
         duration: 250.milliseconds,
         width: double.infinity,
-        height: _controller.showAction.value ? 130 : 0,
+        height: controller.showAction.value ? 130 : 0,
         padding: UIHelper.paddingAll16,
         color: AssetColors.colorGreyE7E7E7,
         child: SingleChildScrollView(
@@ -25,7 +28,7 @@ class ContainerBottomReadAction extends StatelessWidget {
               Column(
                 children: [
                   InkWell(
-                    onTap: _controller.onTapChapterPre,
+                    onTap: controller.onTapChapterPre,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -39,7 +42,7 @@ class ContainerBottomReadAction extends StatelessWidget {
                   ),
                   20.verticalSpace,
                   InkWell(
-                    onTap: _controller.onTapListChapter,
+                    onTap: controller.onTapListChapter,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -56,7 +59,7 @@ class ContainerBottomReadAction extends StatelessWidget {
               Column(
                 children: [
                   InkWell(
-                    onTap: _controller.onTapChapterNext,
+                    onTap: controller.onTapChapterNext,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -70,7 +73,7 @@ class ContainerBottomReadAction extends StatelessWidget {
                   ),
                   20.verticalSpace,
                   InkWell(
-                    onTap: _controller.onTapSetting,
+                    onTap: controller.onTapSetting,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [

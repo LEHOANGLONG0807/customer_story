@@ -20,14 +20,11 @@ import '../../services/services.dart';
 import 'setting_read_page.dart';
 
 class ReadStoryController extends GetxController {
-  final ChapterRepositoryImpl chapterRepository;
+  ChapterRepositoryImpl get chapterRepository => Get.find();
 
-  final StoryRepositoryImpl storyRepository;
+  StoryRepositoryImpl get storyRepository => Get.find();
 
-  final DBService dbService;
-
-  ReadStoryController(
-      {required this.chapterRepository, required this.storyRepository, required this.dbService});
+  DBService get dbService => Get.find();
 
   AppController get appController => Get.find();
 
@@ -134,10 +131,12 @@ class ReadStoryController extends GetxController {
   Future fetchChapterContentById() async {
     try {
       EasyLoading.show();
-      appController.bannerAdMedium.dispose();
-      appController.bannerAdMedium.load();
-      appController.bannerAdMedium2.dispose();
-      appController.bannerAdMedium2.load();
+      if (appController.showAds) {
+        appController.bannerAdMedium.dispose();
+        appController.bannerAdMedium.load();
+        appController.bannerAdMedium2.dispose();
+        appController.bannerAdMedium2.load();
+      }
       final _response =
           await chapterRepository.fetchChapterContentById(chapterId: chapterId, storyId: storyId);
       chapterContentModel.value = _response;
@@ -230,6 +229,7 @@ class ReadStoryController extends GetxController {
       EasyLoading.show();
       final _boardLocalModel = storyModel!.toStoryBroadLocalModel;
       final _response = await dbService.addStoryBoard(model: _boardLocalModel);
+      EasyLoading.dismiss();
       if (_response) {
         showSnackBarSuccess(message: 'Thêm vào tủ truyện thành công!');
         showButtonAddBoard.value = false;
