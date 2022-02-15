@@ -322,10 +322,6 @@ class ReadStoryController extends GetxController {
     scaffoldKey.currentState!.openDrawer();
   }
 
-  void onTapSetting() {
-    Get.to(() => SettingReadPage());
-//    itemScrollController.scrollTo(index: _firstTimeLoad ? _initPageIndex : 0, duration: 150.milliseconds, curve: Curves.linear);
-  }
 
   /// sort truyện
 

@@ -4,14 +4,17 @@ import '../pages.dart';
 import '../../common/common.dart';
 
 class SettingReadPage extends StatelessWidget {
-  ReadStoryController get _controller => Get.find();
+  final ReadStoryController  controller;
+
+  SettingReadPage(this.controller);
+
   final _theme = Get.theme;
   final _fontSize = 16.0.obs;
   final _readHorizontal = false.obs;
   @override
   Widget build(BuildContext context) {
-    _readHorizontal.value = _controller.appController.readHorizontal.value;
-    _fontSize.value = _controller.textStyle.value.fontSize!;
+    _readHorizontal.value = controller.appController.readHorizontal.value;
+    _fontSize.value = controller.textStyle.value.fontSize!;
     return Scaffold(
       appBar: AppBar(
         title: Text('Cài đặt',style: _theme.textTheme.headline6!.textWhite,),
@@ -33,10 +36,10 @@ class SettingReadPage extends StatelessWidget {
           const Spacer(),
           Text('Lưu lại').elevatedButton(
             onPressed: () {
-              if (_controller.appController.readHorizontal.value != _readHorizontal.value) {
-                _controller.onSaveSettingScrollDirectionStory(readHorizontal: _readHorizontal.value);
+              if (controller.appController.readHorizontal.value != _readHorizontal.value) {
+                controller.onSaveSettingScrollDirectionStory(readHorizontal: _readHorizontal.value);
               }
-              _controller.onSaveSettingFontSize(fontSize: _fontSize.value);
+              controller.onSaveSettingFontSize(fontSize: _fontSize.value);
             },
           ).fullWidth,
         ],

@@ -4,6 +4,7 @@ import 'package:truyen_chu/theme/theme.dart';
 import '../../../common/common.dart';
 
 import '../../pages.dart';
+import '../setting_read_page.dart';
 
 class ContainerBottomReadAction extends StatelessWidget {
   final ReadStoryController controller;
@@ -73,7 +74,9 @@ class ContainerBottomReadAction extends StatelessWidget {
                   ),
                   20.verticalSpace,
                   InkWell(
-                    onTap: controller.onTapSetting,
+                    onTap: (){
+                      Get.to(() => SettingReadPage(controller));
+                    },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
